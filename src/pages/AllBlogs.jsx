@@ -1,8 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import BlogPost from "../components/BlogPost";
 
 const AllBlogs = () => {
-  const [data, setData] = useState(null);
+  const [blogs, setBlogs] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,8 +14,8 @@ const AllBlogs = () => {
         const response = await axios.get("http://localhost:5001/all_blogs");
 
         if (response.data) {
-          console.log("Fetched Data:", response.data);
-          setData(response.data);
+          // console.log("Fetched Data:", response.data);
+          setBlogs(response.data);
         } else {
           console.warn("No data found:", response.data);
           setError("No data found");
@@ -30,7 +31,7 @@ const AllBlogs = () => {
     fetchAllData();
   }, []);
   //
-
+  // console.log(blogs);
   // Loading state UI
   if (loading) {
     return (
@@ -46,7 +47,21 @@ const AllBlogs = () => {
   }
 
   // success UI
-  return <div>Total Blogs : {data?.length}</div>;
+  return (
+    <div className="w-11/12 mx-auto mt-7">
+      <p>Total Blogs : {blogs?.length}</p>
+
+      {/* sorting section */}
+      <div></div>
+
+      <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+        {/* <BlogPost data={data} /> */}
+        {blogs.map((blog) => (
+          <BlogPost key={blog._id} blog={blog} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default AllBlogs;

@@ -33,23 +33,19 @@ const AddBlog = () => {
       submissionTime,
     };
 
-    secureAxios
-      .post("/all_blogs", {
-        params: data,
-      })
-      .then((res) => {
-        const data = res.data;
-        if (data) {
-          console.log(data);
-          Swal.fire({
-            title: "Success!",
-            text: "Coffee added successfully",
-            icon: "success",
-            confirmButtonText: "Ok",
-          });
-          //? e.target.reset();
-        }
-      });
+    secureAxios.post("/all_blogs", data).then((res) => {
+      const data = res.data;
+      if (data) {
+        console.log(data);
+        Swal.fire({
+          title: "Success!",
+          text: "Coffee added successfully",
+          icon: "success",
+          confirmButtonText: "Ok",
+        });
+        //? e.target.reset();
+      }
+    });
   };
 
   return (
