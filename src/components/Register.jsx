@@ -14,7 +14,8 @@ const Register = () => {
   const [error, setError] = useState("");
 
   // sign up using mail
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
   const handleSubmit = (e) => {
     e.preventDefault();
 
