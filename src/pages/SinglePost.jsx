@@ -1,8 +1,10 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FaThumbsUp, FaThumbsDown, FaComment } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
 import { useParams } from "react-router-dom";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const SinglePost = () => {
   // ? --------------------------
@@ -43,38 +45,44 @@ const SinglePost = () => {
 
   //. ------------------
   const { id } = useParams();
-  console.log(id);
+  const [data, setData] = useState(null); // State to store fetched data
+  const [loading, setLoading] = useState(true); // State to manage loading state
+  const [error, setError] = useState(null); // State to store errors
 
-  //   useEffect(() => {
-  //     // Async function to fetch data by ID
-  //     async function fetchDataById() {
-  //       try {
-  //         // Replace with your actual API URL
-  //         const response = await axios.get(`http://localhost:5001/path/${id}`);
+  const secureAxios = useSecureAxios();
+  useEffect(() => {
+    setLoading(true); // Start loading before making the request
+    setError(null); // Clear any previous error
 
-  //         // Check if the response indicates success
-  //         if (response.data.success) {
-  //           console.log("Fetched Data:", response.data.data);
-  //           setData(response.data.data); // Store data in state
-  //         } else {
-  //           console.warn("No data found:", response.data.message);
-  //           setError("No data found");
-  //         }
-  //       } catch (error) {
-  //         console.error("Error fetching data:", error);
-  //         setError("Error fetching data");
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     }
-
-  //     // Fetch data by ID if the ID is valid
-  //     if (id) {
-  //       fetchDataById(id);
-  //     }
-  //   }, [id]);
+    secureAxios
+      .get(`/blogs/${id}`) // Fetch data
+      .then((res) => {
+        setData(res.data); // Set the fetched data
+        console.log(res.data);
+      })
+      .catch((err) => {
+        setError(err.message || "An error occurred"); // Set the error message
+        console.error(err);
+      })
+      .finally(() => {
+        setLoading(false); // Stop loading after the request is complete
+      });
+  }, [id]);
 
   //. ------------------
+
+  // Optionally handle loading and error states in your component:
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg my-5">
@@ -86,13 +94,13 @@ const SinglePost = () => {
           className="w-full h-64 object-cover rounded-lg"
         />
         <div className="absolute top-4 left-4 bg-black bg-opacity-60 text-white px-3 py-1 rounded-lg">
-          {blog.category}
+          {data?.category}
         </div>
       </div>
 
       {/* Blog Content */}
       <div className="mt-6">
-        <h1 className="text-4xl font-bold text-gray-800">{blog.title}</h1>
+        <h1 className="text-4xl font-bold text-gray-700">{data?.title}</h1>
         <div className="flex items-center justify-between">
           <div className="flex items-center mt-4 space-x-4">
             <img
@@ -102,9 +110,11 @@ const SinglePost = () => {
             />
             <div>
               <p className="text-sm text-gray-700 font-semibold">
-                {blog.authorName}
+                {data?.authorName || "Unknown Author"}
               </p>
-              <p className="text-sm text-gray-500">{blog.authorEmail}</p>
+              <p className="text-sm text-gray-500">
+                {data?.authorEmail || "author@domain.com"}
+              </p>
             </div>
           </div>
           <div className="flex flex-col">
@@ -115,14 +125,16 @@ const SinglePost = () => {
           </div>
         </div>
 
-        <p className="text-sm text-gray-500 mt-2">Posted {blog.postedTime}</p>
+        <p className="text-sm text-gray-500 mt-2">
+          Posted {data?.postedTime || "a few"} min ago
+        </p>
 
         <p className="text-gray-700 mt-6">
-          Short description : {blog.short_description}
+          <span className="font-bold">About :</span> {data?.shortDescription}
         </p>
         <p className="text-gray-700 mt-6">
-          <span className="font-bold">Description :</span>{" "}
-          {blog.long_description}
+          <span className="font-bold">Description :</span>
+          {data?.longDescription}
         </p>
       </div>
 
@@ -140,7 +152,7 @@ const SinglePost = () => {
         />
         <button
           type="submit"
-          className="absolute top-[3px] right-5 text-gray-600"
+          className="absolute top-[3px] right-5 text-gray-600 "
         >
           <IoSend size={20} />
         </button>
@@ -160,16 +172,16 @@ const SinglePost = () => {
         <div className="flex items-center space-x-3">
           <button className="flex items-center text-gray-600 hover:text-blue-600">
             <FaThumbsUp className="mr-1" />
-            <span>{blog.likeCount}</span>
+            <span>{data?.likeCount || 0}</span>
           </button>
           <button className="flex items-center text-gray-600 hover:text-red-600">
             <FaThumbsDown className="mr-1" />
-            <span>{blog.dislikeCount}</span>
+            <span>{data?.dislikeCount || 0}</span>
           </button>
         </div>
         <div className="flex items-center space-x-2 text-gray-600">
           <FaComment />
-          <span>{comments.length}</span>
+          <span>{data?.length || 0}</span>
         </div>
       </div>
 

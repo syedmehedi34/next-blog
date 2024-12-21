@@ -1,6 +1,5 @@
 import React from "react";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useSecureAxios from "../hooks/useSecureAxios";
 
@@ -8,6 +7,7 @@ const AddBlog = () => {
   const { user } = useAuth();
   const authorName = user.displayName;
   const authorImage = user.photoURL;
+  const authorEmail = user.email;
   const secureAxios = useSecureAxios();
 
   const handleSubmit = (e) => {
@@ -30,6 +30,7 @@ const AddBlog = () => {
       longDescription,
       authorName,
       authorImage,
+      authorEmail,
       submissionTime,
     };
 
