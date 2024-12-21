@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../private_pages/Dashboard";
 import UpdateProfile from "../private_pages/UpdateProfile";
 import ResetPass from "../private_pages/ResetPass";
+import SinglePost from "../pages/SinglePost";
 
 const routes = [
   {
@@ -36,7 +37,7 @@ const routes = [
       },
       {
         path: "/blogs/:id",
-        element: <p>hello</p>,
+        element: <SinglePost />,
       },
 
       //! ---------------------------
