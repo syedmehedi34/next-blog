@@ -2,12 +2,13 @@ import React from "react";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const AddBlog = () => {
-  // const [formData, setFormData] = useState({});
   const { user } = useAuth();
   const authorName = user.displayName;
   const authorImage = user.photoURL;
+  const secureAxios = useSecureAxios();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,25 +33,22 @@ const AddBlog = () => {
       submissionTime,
     };
 
-    // setFormData(data);
-    // console.log(data);
-
-    axios
-      .post("http://localhost:5001/all_blogs", data)
-      .then((response) => {
-        const data = response.data;
-        if (data.insertedId) {
+    secureAxios
+      .post("/all_blogs", {
+        params: data,
+      })
+      .then((res) => {
+        const data = res.data;
+        if (data) {
+          console.log(data);
           Swal.fire({
             title: "Success!",
             text: "Coffee added successfully",
             icon: "success",
             confirmButtonText: "Ok",
           });
-          // e.target.reset();
+          //? e.target.reset();
         }
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
       });
   };
 
