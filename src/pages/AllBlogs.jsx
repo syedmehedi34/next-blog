@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import BlogPost from "../components/BlogPost";
+import BlogCards from "../components/BlogCards";
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState(null);
@@ -57,7 +57,7 @@ const AllBlogs = () => {
       <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {/* <BlogPost data={data} /> */}
         {blogs.map((blog) => (
-          <BlogPost key={blog._id} blog={blog} />
+          <BlogCards key={blog._id} blog={blog} />
         ))}
       </div>
     </div>

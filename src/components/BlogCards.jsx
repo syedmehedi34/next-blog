@@ -1,7 +1,11 @@
+// import { Link } from "lucide-react";
+import { BsBookmarkHeartFill } from "react-icons/bs";
 import { FaThumbsUp, FaThumbsDown, FaComment } from "react-icons/fa"; // Importing icons
+import { SiReadme } from "react-icons/si";
+import { Link } from "react-router-dom";
 
-const BlogPost = ({ blog }) => {
-  console.log(blog);
+const BlogCards = ({ blog }) => {
+  // console.log(blog);
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
@@ -39,10 +43,19 @@ const BlogPost = ({ blog }) => {
         </p>
 
         <div className="flex items-center justify-center *:flex-1 gap-5">
-          <button className="  btn btn-neutral text-white py-2 rounded-md bg-blue-900 border-none w-fit">
-            Read More
-          </button>
-          <button className="  btn btn-neutral text-white  py-2 rounded-md bg-blue-900 border-none w-fit">
+          <Link to={`/blogs/${blog._id}`}>
+            <button className="btn btn-neutral text-white py-2 rounded-md bg-blue-900 border-none w-full flex-1">
+              <span>
+                <SiReadme size={17} />
+              </span>
+              Read More
+            </button>
+          </Link>
+
+          <button className="  btn btn-neutral text-white  py-2 rounded-md bg-blue-900 border-none w-full flex-1">
+            <span>
+              <BsBookmarkHeartFill size={16} />
+            </span>
             Wish List
           </button>
         </div>
@@ -70,4 +83,4 @@ const BlogPost = ({ blog }) => {
   );
 };
 
-export default BlogPost;
+export default BlogCards;

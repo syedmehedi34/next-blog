@@ -34,7 +34,12 @@ const routes = [
           </PrivateRoute>
         ),
       },
+      {
+        path: "/blogs/:id",
+        element: <p>hello</p>,
+      },
 
+      //! ---------------------------
       {
         path: "/my_reviews",
         element: (
