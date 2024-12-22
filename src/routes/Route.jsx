@@ -12,6 +12,7 @@ import UpdateProfile from "../private_pages/UpdateProfile";
 import ResetPass from "../private_pages/ResetPass";
 import SinglePost from "../pages/SinglePost";
 import Wishlist from "../private_pages/Wishlist";
+import Featured from "../pages/Featured";
 
 const routes = [
   {
@@ -42,12 +43,8 @@ const routes = [
 
       //! ---------------------------
       {
-        path: "/my_reviews",
-        element: (
-          <PrivateRoute>
-            <MyReviews />
-          </PrivateRoute>
-        ),
+        path: "/featured",
+        element: <Featured />,
       },
 
       {

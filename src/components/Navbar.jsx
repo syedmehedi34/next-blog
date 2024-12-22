@@ -46,7 +46,7 @@ const Navbar = () => {
       )}
 
       <li>
-        <NavLink to="/my_reviews">Featured Blogs</NavLink>
+        <NavLink to="/featured">Featured Blogs</NavLink>
       </li>
 
       {user && (
