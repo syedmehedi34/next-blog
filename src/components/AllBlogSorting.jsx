@@ -14,19 +14,15 @@ const AllBlogSorting = ({ blogs, setBlogs, setLoading, setError }) => {
     }
 
     try {
-      const response = await fetch(
-        `http://localhost:5001/all_blog?selectedCategory=${selectedCategory}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch reviews");
-      }
-      const data = await response.json();
-      setBlogs(data);
-      console.log(data);
+      const response = await axios.get(`http://localhost:5001/all_blogs`, {
+        params: { selectedCategory },
+      });
+      setBlogs(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
     } finally {
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
