@@ -1,77 +1,95 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { FaThumbsUp, FaThumbsDown, FaComment } from "react-icons/fa";
+import { FaThumbsDown, FaComment } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import useSecureAxios from "../hooks/useSecureAxios";
+import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
+import LikeButton from "../components/LikeButton";
+import DislikeButton from "../components/DislikeButton";
 
 const SinglePost = () => {
-  // ? --------------------------
-  const [comments, setComments] = useState([
-    "Great insights on web development!",
-    "Loved the article, very informative.",
-    "The future looks bright for developers.",
-  ]);
-  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState(0);
+  const [commentCount, setCommentCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [showCommentsModal, setShowCommentsModal] = useState(false);
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const blog = {
-    _id: "6766bb956a2c386d6f436800",
-    title: "The Future of Web Development",
-    image_url:
-      "https://www.elegantthemes.com/blog/wp-content/uploads/2018/11/shutterstock_1049564585-960.jpg",
-    category: "Technology",
-    short_description: "Exploring the latest trends in web development.",
-    long_description:
-      "In this post, we discuss the future of web development, including the rise of AI-driven tools, serverless architecture, and progressive web apps. We explore how these trends are shaping the industry and what web developers need to know to stay ahead.",
-    authorName: "John Doe",
-    authorPhoto: "https://randomuser.me/api/portraits/men/32.jpg", // Example author photo
-    authorEmail: "john.doe@example.com",
-    postedTime: "2 hours ago",
-    likeCount: 10,
-    dislikeCount: 50,
-    commentCount: 25,
-  };
-
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
-    if (newComment.trim()) {
-      setComments((prev) => [...prev, newComment.trim()]);
-      setNewComment("");
-    }
-  };
-  // ? --------------------------
-
-  //. ------------------
   const { id } = useParams();
-  const [data, setData] = useState(null); // State to store fetched data
-  const [loading, setLoading] = useState(true); // State to manage loading state
-  const [error, setError] = useState(null); // State to store errors
+  const { user } = useAuth();
+  const commenterName = user?.displayName || "Unknown";
 
+  const commentingTime = new Date().toLocaleString();
+
+  //   get the single blog post data
   const secureAxios = useSecureAxios();
   useEffect(() => {
-    setLoading(true); // Start loading before making the request
-    setError(null); // Clear any previous error
+    setLoading(true);
+    setError(null);
 
     secureAxios
-      .get(`/blogs/${id}`) // Fetch data
+      .get(`/blogs/${id}`)
       .then((res) => {
-        setData(res.data); // Set the fetched data
-        console.log(res.data);
+        setData(res.data);
+        // console.log(res.data);
       })
       .catch((err) => {
-        setError(err.message || "An error occurred"); // Set the error message
+        setError(err.message || "An error occurred");
         console.error(err);
       })
       .finally(() => {
-        setLoading(false); // Stop loading after the request is complete
+        setLoading(false);
       });
   }, [id]);
 
+  //   post a comment
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    const comment = e.target.comment.value;
+    // console.log(comment);
+    const commentData = {
+      blogId: id,
+      comment,
+      commenterName,
+      commentingTime,
+    };
+
+    secureAxios.post(`/comments/${id}`, commentData).then((res) => {
+      const data = res.data;
+      if (data) {
+        toast.success("Comment added successfully", {
+          position: "top-left",
+          autoClose: 1500,
+        });
+        e.target.reset();
+        setCount(count + 1);
+      }
+    });
+  };
+
+  // show the comments from database
+  useEffect(() => {
+    secureAxios
+      .get(`/comments/${id}`)
+      .then((res) => {
+        setComments(res.data);
+        setCommentCount(res.data.length);
+        // console.log(res.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, [count]);
+
+  // check if the user is the author of the blog post to disable the comment section
+  const isAuthor = user?.email === data?.authorEmail;
+
   //. ------------------
 
-  // Optionally handle loading and error states in your component:
+  // ' handle loading and error states in your component:
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -89,8 +107,11 @@ const SinglePost = () => {
       {/* Blog Image */}
       <div className="relative">
         <img
-          src={blog.image_url}
-          alt={blog.title}
+          src={
+            data?.image_url ||
+            "https://www.elegantthemes.com/blog/wp-content/uploads/2018/11/shutterstock_1049564585-960.jpg"
+          }
+          alt={data?.title}
           className="w-full h-64 object-cover rounded-lg"
         />
         <div className="absolute top-4 left-4 bg-black bg-opacity-60 text-white px-3 py-1 rounded-lg">
@@ -104,9 +125,12 @@ const SinglePost = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center mt-4 space-x-4">
             <img
-              src={blog.authorPhoto}
-              alt={blog.authorName}
-              className="w-12 h-12 rounded-full object-cover"
+              src={
+                data?.authorPhoto ||
+                "https://img.icons8.com/stickers/50/administrator-male.png"
+              }
+              alt={data?.authorName}
+              className="w-12 h-12 rounded-full border-gray-300 border object-cover"
             />
             <div>
               <p className="text-sm text-gray-700 font-semibold">
@@ -117,12 +141,14 @@ const SinglePost = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col">
-            <div className="btn btn-ghost hover:bg-inherit">
-              <FiEdit size={22} />
-              <p>Edit</p>
+          {isAuthor && (
+            <div className="flex flex-col">
+              <div className="btn btn-ghost hover:bg-inherit">
+                <FiEdit size={22} />
+                <p>Edit</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <p className="text-sm text-gray-500 mt-2">
@@ -144,13 +170,17 @@ const SinglePost = () => {
         className="mt-8 flex flex-col items-start space-y-4 relative"
       >
         <textarea
-          className="w-full p-4 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+          className="textarea border border-gray-300 w-full"
           rows="3"
-          placeholder="Write your comment..."
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+          placeholder={
+            isAuthor ? "Authors cannot comment." : "Write your comment..."
+          }
+          name="comment"
+          disabled={isAuthor}
         />
+
         <button
+          disabled={isAuthor}
           type="submit"
           className="absolute top-[3px] right-5 text-gray-600 "
         >
@@ -163,25 +193,19 @@ const SinglePost = () => {
           className="btn btn-neutral min-h-0 h-10 text-white"
           onClick={() => setShowCommentsModal(true)}
         >
-          View Comments ({comments.length})
+          View Comments ({commentCount})
         </button>
       </div>
 
-      {/* Static Like, Dislike, and Comment Count Section */}
+      {/*  Like, Dislike, and Comment Count Section */}
       <div className="flex items-center justify-between mt-8 space-x-6">
-        <div className="flex items-center space-x-3">
-          <button className="flex items-center text-gray-600 hover:text-blue-600">
-            <FaThumbsUp className="mr-1" />
-            <span>{data?.likeCount || 0}</span>
-          </button>
-          <button className="flex items-center text-gray-600 hover:text-red-600">
-            <FaThumbsDown className="mr-1" />
-            <span>{data?.dislikeCount || 0}</span>
-          </button>
+        <div className="flex items-center space-x-5">
+          <LikeButton data={data} />
+          <DislikeButton data={data} />
         </div>
         <div className="flex items-center space-x-2 text-gray-600">
           <FaComment />
-          <span>{data?.length || 0}</span>
+          <span>{comments?.length || 0}</span>
         </div>
       </div>
 
@@ -196,7 +220,7 @@ const SinglePost = () => {
                   key={index}
                   className="text-gray-700 bg-gray-100 py-1 px-2 rounded-md"
                 >
-                  {comment}
+                  {comment.comment}
                 </li>
               ))}
             </ul>

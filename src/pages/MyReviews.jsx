@@ -9,14 +9,14 @@ const MyReviews = () => {
   const secureAxios = useSecureAxios();
 
   // console.log(jobs);
-  useEffect(() => {
-    secureAxios
-      .get("/job-application", {
-        params: { email: user.email }, // Pass params as an object
-      })
-      .then((res) => setJobs(res.data))
-      .catch((err) => console.error(err));
-  }, [user.email]);
+  // useEffect(() => {
+  //   secureAxios
+  //     .get("/job-application", {
+  //       params: { email: user.email }, // Pass params as an object
+  //     })
+  //     .then((res) => setJobs(res.data))
+  //     .catch((err) => console.error(err));
+  // }, [user.email]);
 
   return (
     <div>

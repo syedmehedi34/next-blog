@@ -56,8 +56,8 @@ const AllBlogs = () => {
 
       <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {/* <BlogPost data={data} /> */}
-        {blogs.map((blog) => (
-          <BlogCards key={blog._id} blog={blog} />
+        {blogs.map((blog, i) => (
+          <BlogCards key={i} blog={blog} />
         ))}
       </div>
     </div>
