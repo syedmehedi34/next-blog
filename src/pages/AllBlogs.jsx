@@ -44,7 +44,7 @@ const AllBlogs = () => {
 
   // Error state UI
   if (error) {
-    return <div>Error: {error}</div>;
+    // return <div>Error: {error}</div>;
   }
 
   // success UI
@@ -52,7 +52,12 @@ const AllBlogs = () => {
     <div className="w-11/12 mx-auto mt-7">
       {/* sorting section */}
       <div className="shadow-lg rounded-xl">
-        <AllBlogSorting blogs={blogs} setBlogs={setBlogs}></AllBlogSorting>
+        <AllBlogSorting
+          blogs={blogs}
+          setBlogs={setBlogs}
+          setLoading={setLoading}
+          setError={setError}
+        ></AllBlogSorting>
       </div>
 
       <div className="my-8  grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">

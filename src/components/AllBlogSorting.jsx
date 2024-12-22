@@ -1,67 +1,34 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-const AllBlogSorting = ({ blogs, setBlogs }) => {
-  // console.log(blogs);
-  // console.log(setBlogs);
-  // const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  //
-  //
-  //
+const AllBlogSorting = ({ blogs, setBlogs, setLoading, setError }) => {
+  const [category, setCategory] = useState("");
 
-  const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    console.log(category);
+  const handleCategoryChange = async (e) => {
+    const selectedCategory = e.target.value;
+    setCategory(selectedCategory);
 
-    // Using useEffect to fetch data when component is mounted
-
-    // Exit if userMail is not provided
-    if (!category) {
+    if (!selectedCategory) {
       setError("Category is required to fetch blogs.");
       return;
     }
 
-    const fetchReviews = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        // Replace with your environment variable for the API URL
-        const response = await axios.get(
-          `http://localhost:5001//all_blogs`,
-          category
-        );
-
-        if (response.data.success) {
-          setBlogs(response.data);
-          console.log(response.data);
-        } else {
-          setError(response.data.message);
-        }
-      } catch (error) {
-        // Handle network or server errors
-        console.error("Error fetching reviews:", error);
-        setError("An error occurred while fetching reviews.");
-      } finally {
-        setLoading(false);
+    try {
+      const response = await fetch(
+        `http://localhost:5001/all_blog?selectedCategory=${selectedCategory}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch reviews");
       }
-    };
-
-    fetchReviews();
+      const data = await response.json();
+      setBlogs(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    } finally {
+      // setLoading(false);
+    }
   };
-  // console.log(object)
-  //
-  //
-  //
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
 
   return (
     <div className="py-5 px-5 bg-gray-300 rounded-xl flex items-center justify-between">
@@ -85,13 +52,13 @@ const AllBlogSorting = ({ blogs, setBlogs }) => {
 
       <div className="w-1/4">
         <select
-          defaultValue="All Category"
-          className="select select-bordered w-full max-w-xs"
           onChange={handleCategoryChange}
+          className="select select-bordered w-full max-w-xs"
+          value={category}
         >
-          <option>All Category</option>
-          <option>Han Solo</option>
-          <option>Greedo</option>
+          <option value="">All</option>
+          <option value="Travel">Travel</option>
+          <option value="Health">Health</option>
         </select>
       </div>
     </div>
