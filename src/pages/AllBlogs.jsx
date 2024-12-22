@@ -51,8 +51,8 @@ const AllBlogs = () => {
   return (
     <div className="w-11/12 mx-auto mt-7">
       {/* sorting section */}
-      <div className="">
-        <AllBlogSorting></AllBlogSorting>
+      <div className="shadow-lg rounded-xl">
+        <AllBlogSorting blogs={blogs} setBlogs={setBlogs}></AllBlogSorting>
       </div>
 
       <div className="my-8  grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">

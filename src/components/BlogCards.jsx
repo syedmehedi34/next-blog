@@ -1,4 +1,3 @@
-// import { Link } from "lucide-react";
 import { BsBookmarkHeartFill } from "react-icons/bs";
 import { FaThumbsUp, FaThumbsDown, FaComment } from "react-icons/fa"; // Importing icons
 import { SiReadme } from "react-icons/si";
@@ -44,7 +43,7 @@ const BlogCards = ({ blog }) => {
 
         <div className="flex items-center justify-center *:flex-1 gap-5">
           <Link to={`/blogs/${blog._id}`}>
-            <button className="btn btn-neutral text-white py-2 rounded-md bg-blue-900 border-none w-full flex-1">
+            <button className="btn btn-neutral text-white py-2 rounded-full bg-blue-900 border-none w-full flex-1">
               <span>
                 <SiReadme size={17} />
               </span>
@@ -52,7 +51,7 @@ const BlogCards = ({ blog }) => {
             </button>
           </Link>
 
-          <button className="  btn btn-neutral text-white  py-2 rounded-md bg-blue-900 border-none w-full flex-1">
+          <button className="  btn text-white  py-2 rounded-full bg-blue-900 border-none w-full flex-1">
             <span>
               <BsBookmarkHeartFill size={16} />
             </span>
