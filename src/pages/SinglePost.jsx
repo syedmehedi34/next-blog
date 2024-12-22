@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 import LikeButton from "../components/LikeButton";
 import DislikeButton from "../components/DislikeButton";
 import { BsBookmarkHeartFill } from "react-icons/bs";
-// import WishlistButton from "../components/WishlistButton";
 import useWishlistHook from "../hooks/wishlistHook";
 
 const SinglePost = () => {
@@ -209,7 +208,7 @@ const SinglePost = () => {
         </button>
 
         <button
-          onClick={handleWishlist}
+          onClick={() => handleWishlist(data)}
           className="btn btn-neutral min-h-0 h-10 text-white"
         >
           <span>

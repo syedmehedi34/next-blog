@@ -8,10 +8,10 @@ import MyReviews from "../pages/MyReviews";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import PrivateRoute from "./PrivateRoute";
-import Dashboard from "../private_pages/Dashboard";
 import UpdateProfile from "../private_pages/UpdateProfile";
 import ResetPass from "../private_pages/ResetPass";
 import SinglePost from "../pages/SinglePost";
+import Wishlist from "../private_pages/Wishlist";
 
 const routes = [
   {
@@ -51,13 +51,12 @@ const routes = [
       },
 
       {
-        path: "/dashboard",
+        path: "/wishlist",
         element: (
           <PrivateRoute>
-            <Dashboard />
+            <Wishlist />
           </PrivateRoute>
         ),
-        loader: () => import("../private_pages/Dashboard"),
       },
       {
         path: "/update-profile",

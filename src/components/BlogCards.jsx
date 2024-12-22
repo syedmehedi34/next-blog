@@ -53,7 +53,7 @@ const BlogCards = ({ blog }) => {
           </Link>
 
           <button
-            onClick={handleWishlist}
+            onClick={() => handleWishlist(blog)}
             className="  btn text-white  py-2 rounded-full bg-blue-900 border-none w-full flex-1"
           >
             <span>
