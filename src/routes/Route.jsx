@@ -57,6 +57,7 @@ const routes = [
             <Dashboard />
           </PrivateRoute>
         ),
+        loader: () => import("../private_pages/Dashboard"),
       },
       {
         path: "/update-profile",

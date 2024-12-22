@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BlogCards from "../components/BlogCards";
+import AllBlogSorting from "../components/AllBlogSorting";
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState(null);
@@ -49,12 +50,12 @@ const AllBlogs = () => {
   // success UI
   return (
     <div className="w-11/12 mx-auto mt-7">
-      <p>Total Blogs : {blogs?.length}</p>
-
       {/* sorting section */}
-      <div></div>
+      <div className="">
+        <AllBlogSorting></AllBlogSorting>
+      </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="my-8  grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
         {/* <BlogPost data={data} /> */}
         {blogs.map((blog, i) => (
           <BlogCards key={i} blog={blog} />
