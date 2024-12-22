@@ -16,8 +16,8 @@ const AddBlog = () => {
     const title = form.title.value;
     const image = form.image.value;
     const category = form.category.value;
-    const shortDescription = form.shortDescription.value;
-    const longDescription = form.longDescription.value;
+    const short_description = form.shortDescription.value;
+    const long_description = form.longDescription.value;
 
     // Get the current date and time
     const submissionTime = new Date().toLocaleString();
@@ -26,8 +26,8 @@ const AddBlog = () => {
       title,
       image,
       category,
-      shortDescription,
-      longDescription,
+      short_description,
+      long_description,
       authorName,
       authorImage,
       authorEmail,

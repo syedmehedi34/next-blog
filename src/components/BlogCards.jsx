@@ -37,8 +37,7 @@ const BlogCards = ({ blog }) => {
 
         {/* Ensuring this <p> takes maximum space */}
         <p className="text-gray-600 mb-4 flex-grow">
-          <strong>Short Description:</strong> Exploring the latest trends in web
-          development.
+          <strong>Short Description:</strong> {blog?.short_description}
         </p>
 
         <div className="flex items-center justify-center *:flex-1 gap-5">

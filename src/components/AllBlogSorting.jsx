@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const AllBlogSorting = ({ blogs, setBlogs, setLoading, setError }) => {
+const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
   const [category, setCategory] = useState("");
 
+  // category sorting function
   const handleCategoryChange = async (e) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
@@ -18,7 +19,29 @@ const AllBlogSorting = ({ blogs, setBlogs, setLoading, setError }) => {
         params: { selectedCategory },
       });
       setBlogs(response.data);
-      console.log(response.data);
+      // console.log(response.data);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // text searching function
+  const handleTextSearch = async (e) => {
+    const searchText = e.target.value;
+    // console.log(searchText);
+    if (!searchText) {
+      setError("Search text is required to fetch blogs.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:5001/all_blogs`, {
+        params: { searchText },
+      });
+      setBlogs(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error("Error fetching reviews:", error);
     } finally {
@@ -30,7 +53,12 @@ const AllBlogSorting = ({ blogs, setBlogs, setLoading, setError }) => {
     <div className="py-5 px-5 bg-gray-300 rounded-xl flex items-center justify-between">
       <div className="w-1/3">
         <label className="input input-bordered flex items-center gap-2">
-          <input type="text" className="grow" placeholder="Search" />
+          <input
+            onChange={handleTextSearch}
+            type="text"
+            className="grow"
+            placeholder="Search"
+          />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"

@@ -156,11 +156,11 @@ const SinglePost = () => {
         </p>
 
         <p className="text-gray-700 mt-6">
-          <span className="font-bold">About :</span> {data?.shortDescription}
+          <span className="font-bold">About :</span> {data?.short_description}
         </p>
         <p className="text-gray-700 mt-6">
           <span className="font-bold">Description :</span>
-          {data?.longDescription}
+          {data?.long_description}
         </p>
       </div>
 
