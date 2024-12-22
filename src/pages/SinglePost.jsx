@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaThumbsDown, FaComment } from "react-icons/fa";
+import { FaComment } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
 import { useParams } from "react-router-dom";
@@ -8,6 +8,9 @@ import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
 import LikeButton from "../components/LikeButton";
 import DislikeButton from "../components/DislikeButton";
+import { BsBookmarkHeartFill } from "react-icons/bs";
+// import WishlistButton from "../components/WishlistButton";
+import useWishlistHook from "../hooks/wishlistHook";
 
 const SinglePost = () => {
   const [comments, setComments] = useState(0);
@@ -86,6 +89,15 @@ const SinglePost = () => {
 
   // check if the user is the author of the blog post to disable the comment section
   const isAuthor = user?.email === data?.authorEmail;
+
+  //
+  //
+  //
+  // const { handleButtonClick1 } = useButtonHandlers();
+  const { handleWishlist } = useWishlistHook();
+
+  //
+  //
 
   //. ------------------
 
@@ -188,12 +200,22 @@ const SinglePost = () => {
         </button>
       </form>
       {/* Buttons */}
-      <div className="flex justify-between items-center mt-4">
+      <div className="flex gap-5 items-center mt-4">
         <button
           className="btn btn-neutral min-h-0 h-10 text-white"
           onClick={() => setShowCommentsModal(true)}
         >
           View Comments ({commentCount})
+        </button>
+
+        <button
+          onClick={handleWishlist}
+          className="btn btn-neutral min-h-0 h-10 text-white"
+        >
+          <span>
+            <BsBookmarkHeartFill />
+          </span>
+          Add to Wishlist
         </button>
       </div>
 

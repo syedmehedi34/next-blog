@@ -2,9 +2,11 @@ import { BsBookmarkHeartFill } from "react-icons/bs";
 import { FaThumbsUp, FaThumbsDown, FaComment } from "react-icons/fa"; // Importing icons
 import { SiReadme } from "react-icons/si";
 import { Link } from "react-router-dom";
+import useWishlistHook from "../hooks/wishlistHook";
 
 const BlogCards = ({ blog }) => {
   // console.log(blog);
+  const { handleWishlist } = useWishlistHook(); // wishlist hook
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
@@ -50,11 +52,14 @@ const BlogCards = ({ blog }) => {
             </button>
           </Link>
 
-          <button className="  btn text-white  py-2 rounded-full bg-blue-900 border-none w-full flex-1">
+          <button
+            onClick={handleWishlist}
+            className="  btn text-white  py-2 rounded-full bg-blue-900 border-none w-full flex-1"
+          >
             <span>
               <BsBookmarkHeartFill size={16} />
             </span>
-            Wish List
+            Wishlist
           </button>
         </div>
 
