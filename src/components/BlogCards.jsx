@@ -3,10 +3,23 @@ import { FaThumbsUp, FaThumbsDown, FaComment } from "react-icons/fa"; // Importi
 import { SiReadme } from "react-icons/si";
 import { Link } from "react-router-dom";
 import useWishlistHook from "../hooks/wishlistHook";
+// import { useContext } from "react";
+import useDislikeButton from "../hooks/useDislikeButton";
+import useLikeButton from "../hooks/useLikeButton";
+import { useContext, useEffect, useState } from "react";
+import { DetailContext } from "../providers/BlogDetailsProvider";
 
 const BlogCards = ({ blog }) => {
+  const [likes, setLikes] = useState(0);
   // console.log(blog);
-  const { handleWishlist } = useWishlistHook(); // wishlist hook
+  const { handleWishlist } = useWishlistHook();
+  const handleLikeButton = useLikeButton();
+  const handleDislike = useDislikeButton();
+  const { toggleLike, toggleDislike } = useContext(DetailContext);
+  useEffect(() => {
+    setLikes(blog?.likeCount);
+    // console.log(likes);
+  }, [toggleLike, toggleDislike]);
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
@@ -66,11 +79,21 @@ const BlogCards = ({ blog }) => {
         {/* Static Like, Dislike, and Comment Count Section */}
         <div className="flex items-center justify-between mt-6 space-x-6">
           <div className="flex items-center space-x-3">
-            <button className="flex items-center text-gray-600 hover:text-blue-600">
+            <button
+              onClick={() => {
+                handleLikeButton(blog);
+              }}
+              className="flex items-center text-gray-600 hover:text-blue-600"
+            >
               <FaThumbsUp className="mr-1" />
-              <span>{blog?.likeCount || 0}</span>
+              <span>{likes || 0}</span>
             </button>
-            <button className="flex items-center text-gray-600 hover:text-red-600">
+            <button
+              onClick={() => {
+                handleDislike(blog);
+              }}
+              className="flex items-center text-gray-600 hover:text-red-600"
+            >
               <FaThumbsDown className="mr-1" />
               <span>{blog?.dislikeCount || 0}</span>
             </button>

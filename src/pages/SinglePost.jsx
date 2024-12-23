@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { FaComment, FaThumbsUp } from "react-icons/fa";
+import { FaComment, FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
-// import LikeButton from "../components/LikeButton";
-import DislikeButton from "../components/DislikeButton";
 import { BsBookmarkHeartFill } from "react-icons/bs";
 import useWishlistHook from "../hooks/wishlistHook";
-import useLikeButton from "../hooks/useLikeButton";
 import { DetailContext } from "../providers/BlogDetailsProvider";
+import useDislikeButton from "../hooks/useDislikeButton";
+import useLikeButton from "../hooks/useLikeButton";
 
 const SinglePost = () => {
   const [comments, setComments] = useState(0);
@@ -21,11 +20,11 @@ const SinglePost = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [likeCount, setLikeCount] = useState(0);
   const handleLikeButton = useLikeButton();
+  const handleDislike = useDislikeButton();
 
-  const { likeCount, setLikeCount } = useContext(DetailContext);
-  console.log(likeCount);
+  const { likeCount, setLikeCount, dislikeCount, setDislikeCount } =
+    useContext(DetailContext);
 
   const { id } = useParams();
   const { user } = useAuth();
@@ -44,6 +43,7 @@ const SinglePost = () => {
       .then((res) => {
         setData(res.data);
         setLikeCount(res.data.likeCount);
+        setDislikeCount(res.data.dislikeCount);
         // console.log(res.data);
       })
       .catch((err) => {
@@ -97,14 +97,8 @@ const SinglePost = () => {
   // check if the user is the author of the blog post to disable the comment section
   const isAuthor = user?.email === data?.authorEmail;
 
-  //
-  //
-  //
   // const { handleButtonClick1 } = useButtonHandlers();
   const { handleWishlist } = useWishlistHook();
-
-  //
-  //
 
   // ' handle loading and error states in your component:
   if (loading) {
@@ -227,17 +221,26 @@ const SinglePost = () => {
       {/*  Like, Dislike, and Comment Count Section */}
       <div className="flex items-center justify-between mt-8 space-x-6">
         <div className="flex items-center space-x-5">
-          {/* <LikeButton data={data} /> */}
           <div>
             <button
               onClick={() => handleLikeButton(data)}
               className="flex items-center text-gray-600 hover:text-blue-600"
             >
               <FaThumbsUp className="mr-1" />
-              <span>{likeCount}</span> {/* Display the updated like count */}
+              <span>{likeCount || 0}</span>
+              {/* Display the updated like count */}
             </button>
           </div>
-          <DislikeButton data={data} />
+          <div>
+            <button
+              onClick={() => handleDislike(data)}
+              className="flex items-center text-gray-600 hover:text-red-600"
+            >
+              <FaThumbsDown className="mr-1" />
+              <span>{dislikeCount}</span>{" "}
+              {/* Display the updated dislike count */}
+            </button>
+          </div>
         </div>
         <div className="flex items-center space-x-2 text-gray-600">
           <FaComment />
