@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useSecureAxios from "../hooks/useSecureAxios";
+import FeaturedTable from "../components/FeaturedTable";
 
 const Featured = () => {
   const secureAxios = useSecureAxios();
@@ -32,16 +33,62 @@ const Featured = () => {
       <h1>Featured</h1>
       <div>
         {/* Render featured data once it's loaded */}
-        {featured.map((item) => (
-          <div key={item._id}>
-            {/* Assuming each featured item has an 'id' and other properties */}
-            {/* <h2>{item.title}</h2> */}
-            {/* <p>{item.description}</p> */}
-          </div>
-        ))}
+        {/* {featured.map((item) => ( */}
+        <FeaturedTable
+        //  key={item._id}
+        ></FeaturedTable>
+        {/* ))} */}
       </div>
     </div>
   );
 };
 
 export default Featured;
+
+// const columns = [
+//   {
+//     accessorKey: "title",
+//     header: "Title",
+//   },
+//   {
+//     accessorKey: "image",
+//     header: "Image",
+//     cell: ({ getValue }) => (
+//       <img
+//         src={getValue()}
+//         alt="Thumbnail"
+//         className="w-12 h-12 object-cover rounded"
+//       />
+//     ),
+//   },
+//   {
+//     accessorKey: "category",
+//     header: "Category",
+//   },
+//   {
+//     accessorKey: "authorName",
+//     header: "Author",
+//   },
+//   {
+//     id: "actions",
+//     header: "Actions",
+//     cell: ({ row }) => (
+//       <button
+//         onClick={() => handleRemove(row.original._id)}
+//         className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+//       >
+//         Remove
+//       </button>
+//     ),
+//   },
+// ];
+
+// const handleRemove = (id) => {
+//   setData((prev) => prev.filter((item) => item._id !== id));
+// };
+
+// const table = useTable({
+//   data,
+//   columns,
+//   getCoreRowModel: () => ({ rows: data }),
+// });
