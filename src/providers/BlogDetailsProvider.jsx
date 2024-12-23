@@ -7,6 +7,7 @@ const BlogDetailsProvider = ({ children }) => {
 
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleDislike, setToggleDislike] = useState(false);
+  // const [updatedBlog, setUpdatedBlog] = useState(null);
 
   const allInfo = {
     likeCount,

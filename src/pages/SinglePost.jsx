@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaComment, FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -104,13 +104,12 @@ const SinglePost = () => {
 
   //
 
-  // Function to toggle the modal
+  // function for the modal open and close
   const handleModalUpdate = () => {
     setIsOpen(!isOpen);
-    console.log("clicked");
+    // console.log("clicked");
   };
 
-  // ?
   // ' handle loading and error states in your component:
   if (loading) {
     return (
@@ -178,6 +177,7 @@ const SinglePost = () => {
               <UpdateBlog
                 handleModalUpdate={handleModalUpdate}
                 data={data}
+                setData={setData}
               ></UpdateBlog>
             </div>
           )}
