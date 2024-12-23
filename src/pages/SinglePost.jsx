@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaComment, FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -11,6 +11,7 @@ import useWishlistHook from "../hooks/wishlistHook";
 import { DetailContext } from "../providers/BlogDetailsProvider";
 import useDislikeButton from "../hooks/useDislikeButton";
 import useLikeButton from "../hooks/useLikeButton";
+import UpdateBlog from "../private_pages/UpdateBlog";
 
 const SinglePost = () => {
   const [comments, setComments] = useState(0);
@@ -20,6 +21,7 @@ const SinglePost = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isOpen, setIsOpen] = useState(false); // modal state
   const handleLikeButton = useLikeButton();
   const handleDislike = useDislikeButton();
 
@@ -100,6 +102,15 @@ const SinglePost = () => {
   // const { handleButtonClick1 } = useButtonHandlers();
   const { handleWishlist } = useWishlistHook();
 
+  //
+
+  // Function to toggle the modal
+  const handleModalUpdate = () => {
+    setIsOpen(!isOpen);
+    console.log("clicked");
+  };
+
+  // ?
   // ' handle loading and error states in your component:
   if (loading) {
     return (
@@ -153,11 +164,21 @@ const SinglePost = () => {
             </div>
           </div>
           {isAuthor && (
-            <div className="flex flex-col">
+            // <Link to={`/blogs/${id}/update`}>
+            <div onClick={handleModalUpdate} className="flex flex-col">
               <div className="btn btn-ghost hover:bg-inherit">
                 <FiEdit size={22} />
                 <p>Edit</p>
               </div>
+            </div>
+            // </Link>
+          )}
+          {isOpen && (
+            <div>
+              <UpdateBlog
+                handleModalUpdate={handleModalUpdate}
+                data={data}
+              ></UpdateBlog>
             </div>
           )}
         </div>

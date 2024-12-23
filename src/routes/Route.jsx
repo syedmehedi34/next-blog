@@ -13,6 +13,7 @@ import ResetPass from "../private_pages/ResetPass";
 import SinglePost from "../pages/SinglePost";
 import Wishlist from "../private_pages/Wishlist";
 import Featured from "../pages/Featured";
+import UpdateBlog from "../private_pages/UpdateBlog";
 
 const routes = [
   {
@@ -40,6 +41,10 @@ const routes = [
         path: "/blogs/:id",
         element: <SinglePost />,
       },
+      // {
+      //   path: "/blogs/:id/update",
+      //   element: <UpdateBlog />,
+      // },
 
       //! ---------------------------
       {

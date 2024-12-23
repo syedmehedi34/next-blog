@@ -13,7 +13,7 @@ const Featured = () => {
       .then((res) => {
         const data = res.data;
         if (data) {
-          //   console.log(data);
+          console.log(data);
           setFeatured(data);
           setLoading(false);
         }

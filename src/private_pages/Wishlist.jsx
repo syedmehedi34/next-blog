@@ -14,6 +14,7 @@ const Wishlist = () => {
     secureAxios
       .get("/wishlist", { params: { userEmail } })
       .then((res) => {
+        console.log(res.data);
         setWishlist(res.data);
         setLoading(false); // Set loading to false when data is fetched
       })
