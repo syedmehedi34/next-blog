@@ -55,7 +55,7 @@ const SinglePost = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [id]);
+  }, [id, count]);
 
   //   post a comment
   const handleCommentSubmit = (e) => {
@@ -118,7 +118,7 @@ const SinglePost = () => {
       </div>
     );
   }
-
+  // console.log(data);
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -178,6 +178,8 @@ const SinglePost = () => {
                 handleModalUpdate={handleModalUpdate}
                 data={data}
                 setData={setData}
+                setCount={setCount}
+                count={count}
               ></UpdateBlog>
             </div>
           )}
