@@ -32,12 +32,11 @@ const Featured = () => {
     <div className="w-11/12 mx-auto mt-7">
       <h1>Featured</h1>
       <div>
-        {/* Render featured data once it's loaded */}
-        {/* {featured.map((item) => ( */}
-        <FeaturedTable
-        //  key={item._id}
-        ></FeaturedTable>
-        {/* ))} */}
+        {featured.length === 0 ? (
+          <p>No featured items available.</p>
+        ) : (
+          <FeaturedTable featured={featured} />
+        )}
       </div>
     </div>
   );

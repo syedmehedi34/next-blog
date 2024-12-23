@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useSecureAxios from "../hooks/useSecureAxios";
+import WishlistTable from "../components/WishlistTable";
 
 const Wishlist = () => {
   const secureAxios = useSecureAxios();
   const { user } = useAuth();
   const userEmail = user.email;
-
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
 
@@ -37,12 +37,7 @@ const Wishlist = () => {
         {wishlist.length === 0 ? (
           <p>Your wishlist is empty.</p>
         ) : (
-          wishlist.map((item) => (
-            <div key={item._id}>
-              {/* <h2>{item.title}</h2> */}
-              {/* <p>{item.description}</p> */}
-            </div>
-          ))
+          <WishlistTable wishlist={wishlist} />
         )}
       </div>
     </div>

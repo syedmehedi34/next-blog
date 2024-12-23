@@ -5,8 +5,8 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 
-const FeaturedTable = ({ featured }) => {
-  const [data, setData] = useState(featured);
+const FeaturedTable = ({ wishlist }) => {
+  const [data, setData] = useState(wishlist);
   const columns = [
     {
       id: "imageAndAuthor",
