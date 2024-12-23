@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaThumbsUp } from "react-icons/fa";
 import useSecureAxios from "../hooks/useSecureAxios";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const LikeButton = ({ data }) => {
   const secureAxios = useSecureAxios();
@@ -12,18 +14,14 @@ const LikeButton = ({ data }) => {
     try {
       // Increment the like count in the frontend state
       const newLikeCount = likeCount + 1;
-      setLikeCount(newLikeCount); // Update the like count in the state
+      setLikeCount(newLikeCount);
 
-      // Prepare the data to be sent in the PATCH request
       const updatedData = { likeCount: newLikeCount };
 
-      // Send the PATCH request to update the like count in the database
       await secureAxios.patch(`/blogs/${id}`, updatedData);
 
-      // Optionally, you can handle a success message or do other actions
       console.log("Like count updated successfully");
     } catch (error) {
-      // If the request fails, revert the like count back
       setLikeCount(likeCount);
       console.error("Error updating like count:", error);
     }

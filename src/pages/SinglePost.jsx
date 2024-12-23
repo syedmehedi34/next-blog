@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { FaComment } from "react-icons/fa";
+import React, { useContext, useEffect, useState } from "react";
+import { FaComment, FaThumbsUp } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
-import LikeButton from "../components/LikeButton";
+// import LikeButton from "../components/LikeButton";
 import DislikeButton from "../components/DislikeButton";
 import { BsBookmarkHeartFill } from "react-icons/bs";
 import useWishlistHook from "../hooks/wishlistHook";
+import useLikeButton from "../hooks/useLikeButton";
+import { DetailContext } from "../providers/BlogDetailsProvider";
 
 const SinglePost = () => {
   const [comments, setComments] = useState(0);
@@ -19,6 +21,11 @@ const SinglePost = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const [likeCount, setLikeCount] = useState(0);
+  const handleLikeButton = useLikeButton();
+
+  const { likeCount, setLikeCount } = useContext(DetailContext);
+  console.log(likeCount);
 
   const { id } = useParams();
   const { user } = useAuth();
@@ -36,6 +43,7 @@ const SinglePost = () => {
       .get(`/blogs/${id}`)
       .then((res) => {
         setData(res.data);
+        setLikeCount(res.data.likeCount);
         // console.log(res.data);
       })
       .catch((err) => {
@@ -97,8 +105,6 @@ const SinglePost = () => {
 
   //
   //
-
-  //. ------------------
 
   // ' handle loading and error states in your component:
   if (loading) {
@@ -221,7 +227,16 @@ const SinglePost = () => {
       {/*  Like, Dislike, and Comment Count Section */}
       <div className="flex items-center justify-between mt-8 space-x-6">
         <div className="flex items-center space-x-5">
-          <LikeButton data={data} />
+          {/* <LikeButton data={data} /> */}
+          <div>
+            <button
+              onClick={() => handleLikeButton(data)}
+              className="flex items-center text-gray-600 hover:text-blue-600"
+            >
+              <FaThumbsUp className="mr-1" />
+              <span>{likeCount}</span> {/* Display the updated like count */}
+            </button>
+          </div>
           <DislikeButton data={data} />
         </div>
         <div className="flex items-center space-x-2 text-gray-600">

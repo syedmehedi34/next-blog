@@ -13,14 +13,14 @@ const Featured = () => {
       .then((res) => {
         const data = res.data;
         if (data) {
-          console.log(data);
+          //   console.log(data);
           setFeatured(data);
-          setLoading(false); // Set loading to false once data is fetched
+          setLoading(false);
         }
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        setLoading(false); // Set loading to false if there's an error
+        setLoading(false);
       });
   }, []);
 
