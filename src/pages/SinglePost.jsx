@@ -232,7 +232,7 @@ const SinglePost = () => {
 
         <button
           onClick={() => handleWishlist(data)}
-          className="btn btn-neutral min-h-0 h-10 text-white"
+          className="btn btn-outline min-h-0 h-10 "
         >
           <span>
             <BsBookmarkHeartFill />
