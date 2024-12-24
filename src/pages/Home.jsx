@@ -14,7 +14,7 @@ const Home = () => {
           <Hero />
         </div>
 
-        <div className="">
+        <div className="mt-10">
           <RecentBlogs />
           <FeaturedCategory />
         </div>

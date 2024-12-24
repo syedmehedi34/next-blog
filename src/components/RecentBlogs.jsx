@@ -94,7 +94,7 @@ const RecentBlogs = () => {
       try {
         const response = await axiosInstance.get("/latest");
         setBlogs(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -111,9 +111,13 @@ const RecentBlogs = () => {
   return (
     <section className="py-16 w-11/12 mx-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
           Recent Blog Posts
         </h2>
+        <p className="text-xl font-[500] text-gray-900 mb-12 text-center">
+          Fresh Insights, Timeless Inspiration –{" "}
+          <span className="text-red-600">Dive into Our Recent Blogs!</span>
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.map((blog, index) => (
             <div
@@ -153,9 +157,12 @@ const RecentBlogs = () => {
                 <p className="text-gray-600 mb-4">{blog.short_description}</p>
                 <div className="flex items-center mb-4">
                   <img
-                    src={blog.authorImage}
+                    src={
+                      blog?.authorImage ||
+                      "https://img.icons8.com/office/40/person-male-skin-type-4.png"
+                    }
                     alt={blog.authorName}
-                    className="w-10 h-10 rounded-full mr-3"
+                    className="w-10 h-10 rounded-full mr-3 border border-gray-300"
                   />
                   <div>
                     <p className="text-sm font-medium text-gray-900">

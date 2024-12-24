@@ -16,9 +16,14 @@ const FeaturedCategory = () => {
   return (
     <section className="py-16 bg-white overflow-hidden w-11/12 mx-auto ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-8">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">
           Featured Categories
         </h2>
+        <p className="text-xl font-[500] text-gray-900 mb-12 text-center">
+          Explore Our Blog Categories –{" "}
+          <span className="text-red-600">Dive into Topics That Matter!</span>
+        </p>
+
         <div className="marquee-container">
           <div className="marquee">
             {allCategories.map((category, index) => (

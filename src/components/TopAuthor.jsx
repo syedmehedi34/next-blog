@@ -147,13 +147,23 @@ export default function ContentSections() {
       <section className="py-16 bg-gray-50" ref={authorsRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
-            className="text-3xl font-bold text-gray-900 mb-8"
+            className="text-3xl text-center font-bold text-gray-900 mb-4"
             initial="hidden"
             animate={authorsControls}
             variants={containerVariants}
           >
             Popular Authors
           </motion.h2>
+
+          <motion.p
+            className="text-xl text-center font-[500] text-gray-900 mb-12"
+            initial="hidden"
+            animate={authorsControls}
+            variants={containerVariants}
+          >
+            Meet the Voices Behind the Words –{" "}
+            <span className="text-red-600">Discover Our Popular Authors!</span>
+          </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {authors.map((author, index) => (
