@@ -1,43 +1,13 @@
 import React, { useEffect, useState } from "react";
 import useSecureAxios from "../hooks/useSecureAxios";
+import { Link } from "react-router-dom";
+import useWishlistHook from "../hooks/wishlistHook";
 
 const RecentBlogs = () => {
   const [blogs, setBlogs] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // const getTimeAgo = (dateString) => {
-  //   try {
-  //     const [datePart, timePart] = dateString.split(", ");
-  //     const [day, month, year] = datePart.split("/").map(Number);
-  //     const [hours, minutes, seconds] = timePart.split(":").map(Number);
-
-  //     const submissionDate = new Date(
-  //       year,
-  //       month - 1,
-  //       day,
-  //       hours,
-  //       minutes,
-  //       seconds
-  //     );
-  //     const now = new Date();
-
-  //     const diffInMs = now - submissionDate;
-  //     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-
-  //     if (isNaN(diffInDays)) {
-  //       return "Invalid date format";
-  //     }
-
-  //     if (diffInDays === 1) {
-  //       return "Recently Posted";
-  //     }
-  //     return `Posted ${diffInDays} day${diffInDays > 1 ? "s" : ""} ago`;
-  //   } catch (error) {
-  //     console.error("Error parsing date:", error);
-  //     return "Error with date";
-  //   }
-  // };
+  const { handleWishlist } = useWishlistHook();
 
   const getTimeAgo = (dateString) => {
     try {
@@ -174,10 +144,15 @@ const RecentBlogs = () => {
                   </div>
                 </div>
                 <div className="flex space-x-3">
-                  <p className="flex-1 text-center bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-                    Details
-                  </p>
-                  <button className="flex-1 border-2 border-blue-600 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors">
+                  <Link className="flex-1" to={`/blogs/${blog._id}`}>
+                    <button className="btn btn-primary w-full text-center bg-blue-600 text-white py-2 px-4 rounded-lg ">
+                      Details
+                    </button>
+                  </Link>
+                  <button
+                    onClick={() => handleWishlist(blog)}
+                    className="flex-1 border-2 border-blue-600 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors"
+                  >
                     Add to Wishlist
                   </button>
                 </div>

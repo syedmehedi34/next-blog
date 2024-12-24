@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import styled, { keyframes } from "styled-components";
 
 // Define the blob animation using styled-components keyframes
@@ -31,23 +32,26 @@ const Blob3 = styled(Blob)`
 `;
 
 export default function NewsletterSection() {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-
   //
   const handleNewsletter = (e) => {
     e.preventDefault();
-    // alert(`Subscribed ${name} with email: ${email}`);
-    // setEmail("");
-    // setName("");
+    const email = e.target.email.value;
+    // console.log(email);
+
+    if (!email) {
+      return toast.error("Please enter a valid email address");
+    }
+    toast.success(`Subscribed with email: ${email}`, {
+      autoClose: 1500,
+      position: "top-left",
+    });
+    e.target.email.value = "";
   };
   //
   return (
     <section className="relative py-24 overflow-hidden">
       {/* Decorative elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxIDAgNiAyLjY5IDYgNnMtMi42OSA2LTYgNi02LTIuNjktNi02IDIuNjktNiA2LTZ6TTI0IDQ4YzMuMzEgMCA2IDIuNjkgNiA2cy0yLjY5IDYtNiA2LTYtMi42OS02LTYgMi42OS02IDYtNnptMC0xMmMzLjMxIDAgNiAyLjY5IDYgNnMtMi42OSA2LTYgNi02LTIuNjktNi02IDIuNjktNiA2LTZ6IiBzdHJva2U9IiNmZmYiIHN0cm9rZS1vcGFjaXR5PSIuMSIvPjwvZz48L3N2Zz4=')] opacity-10"></div>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600"></div>
 
       {/* Floating shapes */}
       <Blob />
@@ -66,6 +70,7 @@ export default function NewsletterSection() {
 
           {/* Newsletter Form */}
           <motion.form
+            onSubmit={handleNewsletter}
             className="max-w-lg mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,28 +83,13 @@ export default function NewsletterSection() {
                 whileTap={{ scale: 0.98 }}
               >
                 <input
-                  type="text"
-                  placeholder="Your name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/10 backdrop-blur-md text-white placeholder-purple-200 border border-white/20"
-                />
-              </motion.div>
-              <motion.div
-                className="flex-1"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <input
                   type="email"
+                  name="email"
                   placeholder="Your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white/10 backdrop-blur-md text-white placeholder-purple-200 border border-white/20"
                 />
               </motion.div>
               <motion.button
-                onClick={handleNewsletter}
                 type="submit"
                 className="px-8 py-3 bg-gradient-to-r from-purple-400 to-pink-500 text-white rounded-lg font-semibold shadow-lg hover:shadow-xl transition-shadow"
                 whileHover={{ scale: 1.05 }}

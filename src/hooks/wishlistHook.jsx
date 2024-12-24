@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import useSecureAxios from "./useSecureAxios";
-import Swal from "sweetalert2";
 import useAuth from "./useAuth";
 import { toast } from "react-toastify";
 
