@@ -30,12 +30,26 @@ const Wishlist = () => {
 
   return (
     <div className="w-11/12 mx-auto mt-7">
-      <h1>Wishlist</h1>
+      {/* <h1>Wishlist</h1> */}
+      <div className="bg-gray-800 text-white py-5 px-6 rounded-t-md shadow-md">
+        <h2 className="text-2xl font-bold">Your Wishlist </h2>
+        <p className="text-sm text-gray-300 mt-2">
+          All the blogs you've added to wishlist, organized in one place.
+        </p>
+      </div>
 
       <div>
         {/* Render wishlist data */}
         {wishlist.length === 0 ? (
-          <p>Your wishlist is empty.</p>
+          <div>
+            <h3 className="text-2xl mt-10 text-center">
+              No items in your wishlist
+            </h3>
+            <p className="text-gray-500 mt-2 text-center">
+              Add items to your wishlist by clicking the heart icon on the blog
+              page.
+            </p>
+          </div>
         ) : (
           <WishlistTable wishlist={wishlist} />
         )}

@@ -41,7 +41,7 @@ const FeaturedTable = ({ wishlist }) => {
       cell: ({ row }) => (
         <button
           onClick={() => handleRemove(row.original._id)}
-          className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+          className="btn min-h-0 h-7 border-none hover:border-none bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
         >
           Remove
         </button>
@@ -49,7 +49,7 @@ const FeaturedTable = ({ wishlist }) => {
     },
   ];
 
-  // ?
+  // * wishlist delete functions
   const handleRemove = (id) => {
     // console.log("wishlist remove button clicked", id);
 
@@ -86,7 +86,7 @@ const FeaturedTable = ({ wishlist }) => {
       }
     });
   };
-  // ?
+  //----------------------------------------------//
   // console.log(wishlist);
   const table = useReactTable({
     data,

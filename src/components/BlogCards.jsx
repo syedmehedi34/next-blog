@@ -67,7 +67,7 @@ const BlogCards = ({ blog }) => {
 
           <button
             onClick={() => handleWishlist(blog)}
-            className="  btn text-white  py-2 rounded-full bg-blue-900 border-none w-full flex-1"
+            className="btn btn-outline   py-2 rounded-full  w-full flex-1"
           >
             <span>
               <BsBookmarkHeartFill size={16} />

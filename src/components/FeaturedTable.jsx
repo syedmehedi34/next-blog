@@ -7,6 +7,8 @@ import {
 import Swal from "sweetalert2";
 import axios from "axios";
 import useSecureAxios from "../hooks/useSecureAxios";
+import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa6";
 
 const FeaturedTable = ({ featured }) => {
   const [data, setData] = useState(featured);
@@ -40,53 +42,18 @@ const FeaturedTable = ({ featured }) => {
       id: "actions",
       header: "Actions",
       cell: ({ row }) => (
-        <button
-          onClick={() => handleRemove(row.original._id)}
-          className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-        >
-          Remove
-        </button>
+        <Link to={`/blogs/${row.original._id}`}>
+          <button className="btn btn-outline min-h-0 h-7 ">
+            Details
+            <span className="-rotate-45">
+              <FaArrowRight></FaArrowRight>
+            </span>
+          </button>
+        </Link>
       ),
     },
   ];
 
-  // ?
-  const handleRemove = (id) => {
-    console.log("Featured remove button clicked", id);
-
-    // delete operation here
-
-    // Swal.fire({
-    //   title: "Are you sure to delete this?",
-    //   text: "You won't be able to revert this!",
-    //   icon: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, Delete it!",
-    // }).then(async (result) => {
-    //   if (result.isConfirmed) {
-    //     try {
-    //       // Make the DELETE request using the secured axios instance
-    //       const response = await axiosSecure.delete(`/blogs/${id}`);
-
-    //       // Handle the response
-    //       if (response.data.deletedCount) {
-    //         toast.success("Deleted the review", {
-    //           autoClose: 1500,
-    //         });
-    //       }
-    //     } catch (error) {
-    //       // Handle any errors during the DELETE request
-    //       console.error("Error deleting review:", error);
-    //       toast.error("An error occurred while deleting the review", {
-    //         autoClose: 1500,
-    //       });
-    //     }
-    //   }
-    // });
-  };
-  // ?
   // console.log(featured);
 
   const table = useReactTable({
@@ -108,12 +75,12 @@ const FeaturedTable = ({ featured }) => {
                     className="px-4 py-2 text-left text-gray-700 font-medium"
                     style={
                       index === 0
-                        ? { width: "200px" } // Fixed width for the "Image & Author" column
+                        ? { width: "150px" } //  width for the "Image & Author" column
                         : index === 1
-                        ? { width: "150px" } // Fixed width for the "Category" column
+                        ? { width: "100px" } //  width for the "Category" column
                         : index === 2
-                        ? { width: "300px" } // Fixed width for the "Title" column
-                        : { width: "120px" } // Fixed width for the "Actions" column
+                        ? { width: "350px" } //  width for the "Title" column
+                        : { width: "120px" } //  width for the "Actions" column
                     }
                   >
                     {flexRender(
