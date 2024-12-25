@@ -14,13 +14,13 @@ const Wishlist = () => {
     secureAxios
       .get("/wishlist", { params: { userEmail } })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setWishlist(res.data);
-        setLoading(false); // Set loading to false when data is fetched
+        setLoading(false);
       })
       .catch((err) => {
         console.error("Error fetching wishlist:", err);
-        setLoading(false); // Set loading to false if there's an error
+        setLoading(false);
       });
   }, [userEmail]);
 

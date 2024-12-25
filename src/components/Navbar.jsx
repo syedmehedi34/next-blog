@@ -86,8 +86,11 @@ const Navbar = () => {
               {list}
             </ul>
           </div>
-          <Link to="/" className="btn btn-ghost text-xl">
-            Gaming Groove
+          <Link
+            to="/"
+            className="btn btn-ghost text-xl font-extrabold hover:bg-inherit"
+          >
+            Next <span className="text-red-700">Blog</span>
           </Link>
         </div>
 

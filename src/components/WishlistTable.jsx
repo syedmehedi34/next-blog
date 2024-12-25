@@ -86,7 +86,7 @@ const FeaturedTable = ({ wishlist }) => {
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="hover:bg-gray-50 even:bg-gray-50">
+              <tr key={row.id} className="hover:bg-gray-50 even:bg-gray-100">
                 {row.getVisibleCells().map((cell) => (
                   <td key={cell.id} className="px-4 py-2 text-gray-700">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
