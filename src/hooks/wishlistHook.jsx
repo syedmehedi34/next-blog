@@ -33,8 +33,8 @@ const wishlistHook = () => {
           }
         })
         .catch((error) => {
-          console.error("Error adding to wishlist", error);
-          toast.error("Error adding to wishlist", {
+          // console.error("Error adding to wishlist", error);
+          toast.error("Already added to wishlist", {
             position: "top-left",
             autoClose: 1500,
           });

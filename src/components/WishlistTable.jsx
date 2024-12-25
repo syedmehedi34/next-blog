@@ -55,13 +55,13 @@ const FeaturedTable = ({ wishlist }) => {
 
     // delete operation here
     Swal.fire({
-      title: "Are you sure to delete this?",
+      title: "Are you sure to remove this?",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Delete it!",
+      confirmButtonText: "Yes, Remove it!",
     }).then(async (result) => {
       // console.log(result);
       if (result.isConfirmed) {
@@ -107,12 +107,12 @@ const FeaturedTable = ({ wishlist }) => {
                     className="px-4 py-2 text-left text-gray-700 font-medium"
                     style={
                       index === 0
-                        ? { width: "200px" } // Fixed width for the "Image & Author" column
+                        ? { width: "150px" } //  width for the "Image & Author" column
                         : index === 1
-                        ? { width: "150px" } // Fixed width for the "Category" column
+                        ? { width: "100px" } //  width for the "Category" column
                         : index === 2
-                        ? { width: "300px" } // Fixed width for the "Title" column
-                        : { width: "120px" } // Fixed width for the "Actions" column
+                        ? { width: "350px" } //  width for the "Title" column
+                        : { width: "120px" } //  width for the "Actions" column
                     }
                   >
                     {flexRender(

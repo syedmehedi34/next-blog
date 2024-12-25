@@ -18,7 +18,7 @@ const useSecureAxios = () => {
         return response;
       },
       (error) => {
-        console.log("api response error status", error.status);
+        // console.log("api response error status", error.status);
         if (error.status === 401 || error.status === 403) {
           logOut()
             .then(() => {
