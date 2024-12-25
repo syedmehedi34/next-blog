@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div>
       <div>
-        <div className="w-11/12 mx-auto mt-10 border border-black">
+        <div className="w-11/12 mx-auto mt-10 bg-gray-200 rounded-3xl">
           <Hero />
         </div>
 
