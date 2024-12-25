@@ -56,35 +56,35 @@ const FeaturedTable = ({ featured }) => {
 
     // delete operation here
 
-    Swal.fire({
-      title: "Are you sure to delete this?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, Delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          // Make the DELETE request using the secured axios instance
-          const response = await axiosSecure.delete(`/blogs/${id}`);
+    // Swal.fire({
+    //   title: "Are you sure to delete this?",
+    //   text: "You won't be able to revert this!",
+    //   icon: "warning",
+    //   showCancelButton: true,
+    //   confirmButtonColor: "#3085d6",
+    //   cancelButtonColor: "#d33",
+    //   confirmButtonText: "Yes, Delete it!",
+    // }).then(async (result) => {
+    //   if (result.isConfirmed) {
+    //     try {
+    //       // Make the DELETE request using the secured axios instance
+    //       const response = await axiosSecure.delete(`/blogs/${id}`);
 
-          // Handle the response
-          if (response.data.deletedCount) {
-            toast.success("Deleted the review", {
-              autoClose: 1500,
-            });
-          }
-        } catch (error) {
-          // Handle any errors during the DELETE request
-          console.error("Error deleting review:", error);
-          toast.error("An error occurred while deleting the review", {
-            autoClose: 1500,
-          });
-        }
-      }
-    });
+    //       // Handle the response
+    //       if (response.data.deletedCount) {
+    //         toast.success("Deleted the review", {
+    //           autoClose: 1500,
+    //         });
+    //       }
+    //     } catch (error) {
+    //       // Handle any errors during the DELETE request
+    //       console.error("Error deleting review:", error);
+    //       toast.error("An error occurred while deleting the review", {
+    //         autoClose: 1500,
+    //       });
+    //     }
+    //   }
+    // });
   };
   // ?
   // console.log(featured);

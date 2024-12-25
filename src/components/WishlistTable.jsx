@@ -4,9 +4,14 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
+import Swal from "sweetalert2";
+import useSecureAxios from "../hooks/useSecureAxios";
+import { toast } from "react-toastify";
 
 const FeaturedTable = ({ wishlist }) => {
   const [data, setData] = useState(wishlist);
+  const axiosSecure = useSecureAxios();
+
   const columns = [
     {
       id: "imageAndAuthor",
@@ -44,10 +49,45 @@ const FeaturedTable = ({ wishlist }) => {
     },
   ];
 
+  // ?
   const handleRemove = (id) => {
-    setData((prev) => prev.filter((item) => item._id !== id));
-  };
+    // console.log("wishlist remove button clicked", id);
 
+    // delete operation here
+    Swal.fire({
+      title: "Are you sure to delete this?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Delete it!",
+    }).then(async (result) => {
+      // console.log(result);
+      if (result.isConfirmed) {
+        try {
+          const response = await axiosSecure.delete(`/wishlist/${id}`);
+          // response handling
+          if (response.status === 200) {
+            setData(data.filter((item) => item._id !== id));
+            console.log(response.data.message);
+            toast.success("Deleted the review", {
+              autoClose: 1500,
+              position: "top-left",
+            });
+          }
+        } catch (error) {
+          // Handle any errors during the DELETE request
+          console.error("Error deleting review:", error);
+          toast.error("An error occurred while deleting the review", {
+            autoClose: 1500,
+          });
+        }
+      }
+    });
+  };
+  // ?
+  // console.log(wishlist);
   const table = useReactTable({
     data,
     columns,
