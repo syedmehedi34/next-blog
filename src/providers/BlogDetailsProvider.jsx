@@ -5,6 +5,8 @@ const BlogDetailsProvider = ({ children }) => {
   const [likeCount, setLikeCount] = useState(0);
   const [dislikeCount, setDislikeCount] = useState(0);
 
+  const [post, setPost] = useState(null); // single post data,, used in the SinglePost.jsx and UpdateBlog.jsx. Used this to store the single post data so that i don't have to fetch the data again and again.
+
   const [toggleLike, setToggleLike] = useState(false);
   const [toggleDislike, setToggleDislike] = useState(false);
   // const [updatedBlog, setUpdatedBlog] = useState(null);
@@ -70,6 +72,9 @@ const BlogDetailsProvider = ({ children }) => {
     setToggleDislike,
 
     getTimeAgo,
+
+    post,
+    setPost,
   };
   //
   //

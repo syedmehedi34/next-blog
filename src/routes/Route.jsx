@@ -41,10 +41,10 @@ const routes = [
         path: "/blogs/:id",
         element: <SinglePost />,
       },
-      // {
-      //   path: "/blogs/:id/update",
-      //   element: <UpdateBlog />,
-      // },
+      {
+        path: "/blogs/update/:id",
+        element: <UpdateBlog />,
+      },
 
       //! ---------------------------
       {

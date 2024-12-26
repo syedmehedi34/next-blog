@@ -7,6 +7,7 @@ import {
 import Swal from "sweetalert2";
 import useSecureAxios from "../hooks/useSecureAxios";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const FeaturedTable = ({ wishlist }) => {
   const [data, setData] = useState(wishlist);
@@ -39,12 +40,21 @@ const FeaturedTable = ({ wishlist }) => {
       id: "actions",
       header: "Actions",
       cell: ({ row }) => (
-        <button
-          onClick={() => handleRemove(row.original._id)}
-          className="btn min-h-0 h-7 border-none hover:border-none bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-        >
-          Remove
-        </button>
+        <>
+          <button
+            onClick={() => {
+              handleRemove(row.original._id);
+            }}
+            className="btn min-h-0 h-7 border-none hover:border-none bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+          >
+            Remove
+          </button>
+          <Link to={`/blogs/${row.original.blogID}`}>
+            <button className="btn btn-outline min-h-0 h-7   px-3 py-1 ml-1 rounded ">
+              Details
+            </button>
+          </Link>
+        </>
       ),
     },
   ];

@@ -38,8 +38,8 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
       const response = await axios.get(`http://localhost:5001/all_blogs`, {
         params: { selectedCategory },
       });
-      if (response.data) {
-        console.log("No data found:", response.data);
+      if (!response.data) {
+        // console.log("No data found:", response.data);
       }
       setBlogs(response.data);
       // console.log(response.data);

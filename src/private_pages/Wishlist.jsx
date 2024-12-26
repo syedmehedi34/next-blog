@@ -52,7 +52,7 @@ const Wishlist = () => {
       <div>
         {/* Render wishlist data */}
         {wishlist.length === 0 ? (
-          <div>
+          <div className="mb-12">
             <h3 className="text-2xl mt-10 text-center">
               No items in your wishlist
             </h3>

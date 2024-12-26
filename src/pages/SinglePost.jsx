@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { FaComment, FaThumbsDown, FaThumbsUp } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { IoSend } from "react-icons/io5";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useSecureAxios from "../hooks/useSecureAxios";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -14,25 +14,32 @@ import useLikeButton from "../hooks/useLikeButton";
 import UpdateBlog from "../private_pages/UpdateBlog";
 import { div } from "motion/react-client";
 import { CommentModal } from "../components/CommentModal";
+import { TiArrowBack } from "react-icons/ti";
 
 const SinglePost = () => {
   const [comments, setComments] = useState(0);
   const [commentCount, setCommentCount] = useState(1);
   const [count, setCount] = useState(0);
   const [showCommentsModal, setShowCommentsModal] = useState(false);
-  const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isOpen, setIsOpen] = useState(false); // modal state
   const handleLikeButton = useLikeButton();
   const handleDislike = useDislikeButton();
 
-  const { likeCount, setLikeCount, dislikeCount, setDislikeCount, getTimeAgo } =
-    useContext(DetailContext);
+  const {
+    likeCount,
+    setLikeCount,
+    dislikeCount,
+    setDislikeCount,
+    getTimeAgo,
+    post,
+    setPost,
+  } = useContext(DetailContext);
 
   const { id } = useParams();
   const { user } = useAuth();
   const commenterName = user?.displayName || "Unknown";
+  const commenterPhoto = user?.photoURL;
 
   const commentingTime = new Date().toLocaleString();
 
@@ -45,7 +52,8 @@ const SinglePost = () => {
     secureAxios
       .get(`/blogs/${id}`)
       .then((res) => {
-        setData(res.data);
+        // setData(res.data);
+        setPost(res.data);
         setLikeCount(res.data.likeCount);
         setDislikeCount(res.data.dislikeCount);
         // console.log(res.data);
@@ -69,8 +77,8 @@ const SinglePost = () => {
       comment,
       commenterName,
       commentingTime,
+      commenterPhoto,
     };
-
     secureAxios.post(`/comments/${id}`, commentData).then((res) => {
       const data = res.data;
       if (data) {
@@ -99,20 +107,14 @@ const SinglePost = () => {
   }, [count]);
 
   // check if the user is the author of the blog post to disable the comment section
-  const isAuthor = user?.email === data?.authorEmail;
+  const isAuthor = user?.email === post?.authorEmail;
 
   // const { handleButtonClick1 } = useButtonHandlers();
   const { handleWishlist } = useWishlistHook();
 
   //
 
-  // function for the modal open and close
-  const handleModalUpdate = () => {
-    setIsOpen(!isOpen);
-    // console.log("clicked");
-  };
-
-  // ' handle loading and error states in your component:
+  // - handle loading and error states in your component:
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -126,77 +128,71 @@ const SinglePost = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg my-5">
+    <div className="max-w-4xl mx-auto relative p-6 bg-white shadow-md rounded-lg mb-5 mt-16">
       {/* Blog Image */}
       <div className="relative">
         <img
           src={
-            data?.image_url ||
+            post?.image_url ||
             "https://www.elegantthemes.com/blog/wp-content/uploads/2018/11/shutterstock_1049564585-960.jpg"
           }
-          alt={data?.title}
+          alt={post?.title}
           className="w-full h-64 object-cover rounded-lg"
         />
         <div className="absolute top-4 left-4 bg-black bg-opacity-60 text-white px-3 py-1 rounded-lg">
-          {data?.category}
+          {post?.category}
         </div>
       </div>
 
       {/* Blog Content */}
       <div className="mt-6">
-        <h1 className="text-4xl font-bold text-gray-700">{data?.title}</h1>
+        <h1 className="text-4xl font-bold text-gray-700">{post?.title}</h1>
         <div className="flex items-center justify-between">
           <div className="flex items-center mt-4 space-x-4">
             <img
               src={
-                data?.authorPhoto ||
+                post?.authorPhoto ||
                 "https://img.icons8.com/stickers/50/administrator-male.png"
               }
-              alt={data?.authorName}
+              alt={post?.authorName}
               className="w-12 h-12 rounded-full border-gray-300 border object-cover"
             />
             <div>
               <p className="text-sm text-gray-700 font-semibold">
-                {data?.authorName || "Unknown Author"}
+                {post?.authorName || "Unknown Author"}
               </p>
               <p className="text-sm text-gray-500">
-                {data?.authorEmail || "author@domain.com"}
+                {post?.authorEmail || "author@domain.com"}
               </p>
             </div>
           </div>
           {isAuthor && (
             // <Link to={`/blogs/${id}/update`}>
-            <div onClick={handleModalUpdate} className="flex flex-col">
-              <div className="btn btn-ghost hover:bg-inherit">
-                <FiEdit size={22} />
-                <p>Edit</p>
-              </div>
+            <div
+              // onClick={handleModalUpdate}
+              className="flex flex-col"
+            >
+              <Link to={`/blogs/update/${id}`}>
+                <div className="btn btn-ghost hover:bg-inherit">
+                  <FiEdit size={22} />
+                  <p>Edit</p>
+                </div>
+              </Link>
             </div>
             // </Link>
-          )}
-          {isOpen && (
-            <div>
-              <UpdateBlog
-                handleModalUpdate={handleModalUpdate}
-                data={data}
-                setData={setData}
-                setCount={setCount}
-                count={count}
-              ></UpdateBlog>
-            </div>
           )}
         </div>
 
         <p className="text-sm text-gray-500 mt-2">
-          Posted : {getTimeAgo(data?.submissionTime)}
+          Posted : {getTimeAgo(post?.submissionTime)}
         </p>
 
         <p className="text-gray-700 mt-6">
-          <span className="font-bold">About :</span> {data?.short_description}
+          <span className="font-bold">About :</span> {post?.short_description}
         </p>
         <p className="text-gray-700 mt-6">
           <span className="font-bold">Description :</span>
-          {data?.long_description}
+          {post?.long_description}
         </p>
       </div>
 
@@ -233,7 +229,7 @@ const SinglePost = () => {
         </button>
 
         <button
-          onClick={() => handleWishlist(data)}
+          onClick={() => handleWishlist(post)}
           className="btn btn-outline min-h-0 h-10 "
         >
           <span>
@@ -248,7 +244,7 @@ const SinglePost = () => {
         <div className="flex items-center space-x-5">
           <div>
             <button
-              onClick={() => handleLikeButton(data)}
+              onClick={() => handleLikeButton(post)}
               className="flex items-center text-gray-600 hover:text-blue-600"
             >
               <FaThumbsUp className="mr-1" />
@@ -258,7 +254,7 @@ const SinglePost = () => {
           </div>
           <div>
             <button
-              onClick={() => handleDislike(data)}
+              onClick={() => handleDislike(post)}
               className="flex items-center text-gray-600 hover:text-red-600"
             >
               <FaThumbsDown className="mr-1" />
@@ -284,6 +280,17 @@ const SinglePost = () => {
           </div>
         </div>
       )}
+
+      <div className="absolute -top-12 left-0">
+        <Link to={-1}>
+          <button className="flex items-center  gap-2 text-gray-600 btn bg-white hover:bg-white shadow-none border-none text-lg">
+            <span>
+              <TiArrowBack />
+            </span>{" "}
+            <span>Back</span>
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
