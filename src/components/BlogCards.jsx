@@ -28,9 +28,7 @@ const BlogCards = ({ blog }) => {
   useEffect(() => {
     async function fetchComments() {
       try {
-        const response = await axiosInstance.get(
-          `http://localhost:5001/comments/${blog._id}`
-        );
+        const response = await axiosInstance.get(`/comments/${blog._id}`);
 
         if (response.data) {
           setCommentCount(response.data.length);
@@ -46,7 +44,6 @@ const BlogCards = ({ blog }) => {
       fetchComments();
     }
   }, [axiosInstance, blog._id]);
-
   return (
     <div className="max-w-md w-full mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       {/* Image section */}

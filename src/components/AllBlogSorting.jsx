@@ -6,51 +6,51 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
   const [category, setCategory] = useState("");
   const axiosInstance = useSecureAxios();
 
-  // category sorting function
+  // category search
   const handleCategoryChange = async (e) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
 
     if (!selectedCategory) {
-      // if no category, fetch all data
-      async function fetchAllData() {
-        try {
-          const response = await axiosInstance.get("/all_blogs");
-
-          if (response.data) {
-            setBlogs(response.data);
-          } else {
-            console.warn("No data found:", response.data);
-            setError("No data found");
-          }
-        } catch (error) {
-          console.error("Error fetching data:", error);
-          setError("Error fetching data");
-        } finally {
-          setLoading(false);
+      // If no category is selected, fetch all data
+      try {
+        const response = await axiosInstance.get("/all_blogs");
+        if (response.data) {
+          setBlogs(response.data);
+        } else {
+          console.warn("No data found:", response.data);
+          // setError("No data found");
         }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // setError("Error fetching data");
+      } finally {
+        setLoading(false);
       }
-      fetchAllData();
       return;
     }
 
+    // Fetch data for the selected category
     try {
-      const response = await axios.get(`http://localhost:5001/all_blogs`, {
+      const response = await axiosInstance.get("/all_blogs", {
         params: { selectedCategory },
       });
-      if (!response.data) {
-        // console.log("No data found:", response.data);
+
+      if (response.data) {
+        setBlogs(response.data);
+      } else {
+        console.warn("No data found for the selected category:", response.data);
+        // setError("No data found for the selected category");
       }
-      setBlogs(response.data);
-      // console.log(response.data);
     } catch (error) {
-      console.error("Error fetching reviews:", error);
+      console.error("Error fetching blogs by category:", error);
+      // setError("Error fetching blogs by category");
     } finally {
       setLoading(false);
     }
   };
+  // category search end
 
-  // text searching function
   const handleTextSearch = async (e) => {
     const searchText = e.target.value;
     // console.log(searchText);

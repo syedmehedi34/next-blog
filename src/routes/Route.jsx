@@ -4,7 +4,6 @@ import Home from "../pages/Home";
 import MainLayout from "../layout/MainLayout";
 import AllBlogs from "../pages/AllBlogs";
 import AddBlog from "../pages/AddBlog";
-import MyReviews from "../pages/MyReviews";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import PrivateRoute from "./PrivateRoute";
