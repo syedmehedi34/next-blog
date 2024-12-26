@@ -8,9 +8,11 @@ import useDislikeButton from "../hooks/useDislikeButton";
 import useLikeButton from "../hooks/useLikeButton";
 import { useContext, useEffect, useState } from "react";
 import { DetailContext } from "../providers/BlogDetailsProvider";
+import axios from "axios";
 
 const BlogCards = ({ blog }) => {
   const [likes, setLikes] = useState(0);
+  const [commentCount, setCommentCount] = useState(0);
   // console.log(blog);
   const { handleWishlist } = useWishlistHook();
   const handleLikeButton = useLikeButton();
@@ -20,6 +22,33 @@ const BlogCards = ({ blog }) => {
     setLikes(blog?.likeCount);
     // console.log(likes);
   }, [toggleLike, toggleDislike]);
+
+  // comment section fetching
+  useEffect(() => {
+    async function fetchComments() {
+      try {
+        const response = await axios.get(
+          `http://localhost:5001/comments/${blog._id}`
+        );
+
+        if (response.data) {
+          // setBlogs(response.data);
+          // console.log(response.data);
+          setCommentCount(response.data.length);
+        } else {
+          console.warn("No data found:", response.data);
+          // setError("No data found");
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // setError("Error fetching data");
+      } finally {
+        // setLoading(false);
+      }
+    }
+
+    fetchComments();
+  }, []);
 
   return (
     <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
@@ -101,7 +130,7 @@ const BlogCards = ({ blog }) => {
 
           <div className="flex items-center space-x-2 text-gray-600">
             <FaComment />
-            <span>{blog?.commentCount || 0}</span> {/* Display comment count */}
+            <span>{commentCount || 0}</span> {/* Display comment count */}
           </div>
         </div>
       </div>

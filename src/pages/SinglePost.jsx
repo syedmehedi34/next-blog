@@ -277,31 +277,10 @@ const SinglePost = () => {
       {showCommentsModal && (
         <div>
           <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-            {/* <div className="bg-white p-6 rounded-lg max-w-lg w-full">
-              <ul className="space-y-3  overflow-scroll h-40">
-                {comments.map((comment, index) => (
-                  <li
-                    key={index}
-                    className="text-gray-700 bg-gray-100 py-1 px-2 rounded-md"
-                  >
-                    {comment.comment}
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={() => setShowCommentsModal(false)}
-                className="btn btn-secondary text-white py-2 px-4 rounded-md bg-red-600 hover:bg-red-700 mt-4 transition duration-200"
-              >
-                Close
-              </button>
-            </div> */}
-
-            <div>
-              <CommentModal
-                setShowCommentsModal={setShowCommentsModal}
-                comments={comments}
-              ></CommentModal>
-            </div>
+            <CommentModal
+              setShowCommentsModal={setShowCommentsModal}
+              comments={comments}
+            ></CommentModal>
           </div>
 
           {/* 

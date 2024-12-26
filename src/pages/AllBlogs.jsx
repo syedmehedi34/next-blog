@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import BlogCards from "../components/BlogCards";
 import AllBlogSorting from "../components/AllBlogSorting";
+import Loading from "./Loading";
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState(null);
@@ -32,19 +33,23 @@ const AllBlogs = () => {
     fetchAllData();
   }, []);
   //
-  // console.log(blogs);
+
   // Loading state UI
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <span className="loading loading-bars loading-lg"></span>
+        <Loading />
       </div>
     );
   }
 
   // Error state UI
   if (error) {
-    // return <div>Error: {error}</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p>Error Page ...</p>
+      </div>
+    );
   }
 
   // success UI
@@ -61,7 +66,6 @@ const AllBlogs = () => {
       </div>
 
       <div className="my-8  grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-        {/* <BlogPost data={data} /> */}
         {blogs.map((blog, i) => (
           <BlogCards key={i} blog={blog} />
         ))}
