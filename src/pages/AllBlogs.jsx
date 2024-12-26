@@ -3,20 +3,21 @@ import React, { useEffect, useState } from "react";
 import BlogCards from "../components/BlogCards";
 import AllBlogSorting from "../components/AllBlogSorting";
 import Loading from "./Loading";
+import { use } from "react";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const AllBlogs = () => {
   const [blogs, setBlogs] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const axiosInstance = useSecureAxios();
 
-  //
   useEffect(() => {
     async function fetchAllData() {
       try {
-        const response = await axios.get("http://localhost:5001/all_blogs");
+        const response = await axiosInstance.get("/all_blogs");
 
         if (response.data) {
-          // console.log("Fetched Data:", response.data);
           setBlogs(response.data);
         } else {
           console.warn("No data found:", response.data);
@@ -32,8 +33,9 @@ const AllBlogs = () => {
 
     fetchAllData();
   }, []);
-  //
 
+  //
+  // console.log(blogs);
   // Loading state UI
   if (loading) {
     return (
@@ -44,6 +46,7 @@ const AllBlogs = () => {
   }
 
   // Error state UI
+  // console.log(error);
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-screen">

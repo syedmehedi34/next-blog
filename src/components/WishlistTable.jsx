@@ -70,7 +70,7 @@ const FeaturedTable = ({ wishlist }) => {
           // response handling
           if (response.status === 200) {
             setData(data.filter((item) => item._id !== id));
-            console.log(response.data.message);
+            // console.log(response.data.message);
             toast.success("Deleted the review", {
               autoClose: 1500,
               position: "top-left",

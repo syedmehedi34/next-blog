@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
   const [category, setCategory] = useState("");
+  const axiosInstance = useSecureAxios();
 
   // category sorting function
   const handleCategoryChange = async (e) => {
@@ -10,7 +12,25 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
     setCategory(selectedCategory);
 
     if (!selectedCategory) {
-      setError("Category is required to fetch blogs.");
+      // if no category, fetch all data
+      async function fetchAllData() {
+        try {
+          const response = await axiosInstance.get("/all_blogs");
+
+          if (response.data) {
+            setBlogs(response.data);
+          } else {
+            console.warn("No data found:", response.data);
+            setError("No data found");
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setError("Error fetching data");
+        } finally {
+          setLoading(false);
+        }
+      }
+      fetchAllData();
       return;
     }
 
@@ -18,6 +38,9 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
       const response = await axios.get(`http://localhost:5001/all_blogs`, {
         params: { selectedCategory },
       });
+      if (response.data) {
+        console.log("No data found:", response.data);
+      }
       setBlogs(response.data);
       // console.log(response.data);
     } catch (error) {
@@ -32,7 +55,26 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
     const searchText = e.target.value;
     // console.log(searchText);
     if (!searchText) {
-      setError("Search text is required to fetch blogs.");
+      // if no search text, fetch all data
+      async function fetchAllData() {
+        try {
+          const response = await axiosInstance.get("/all_blogs");
+
+          if (response.data) {
+            setBlogs(response.data);
+          } else {
+            console.warn("No data found:", response.data);
+            setError("No data found");
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setError("Error fetching data");
+        } finally {
+          setLoading(false);
+        }
+      }
+
+      fetchAllData();
       return;
     }
 

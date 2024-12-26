@@ -9,6 +9,7 @@ import useLikeButton from "../hooks/useLikeButton";
 import { useContext, useEffect, useState } from "react";
 import { DetailContext } from "../providers/BlogDetailsProvider";
 import axios from "axios";
+import useSecureAxios from "../hooks/useSecureAxios";
 
 const BlogCards = ({ blog }) => {
   const [likes, setLikes] = useState(0);
@@ -17,41 +18,37 @@ const BlogCards = ({ blog }) => {
   const { handleWishlist } = useWishlistHook();
   const handleLikeButton = useLikeButton();
   const handleDislike = useDislikeButton();
-  const { toggleLike, toggleDislike } = useContext(DetailContext);
+  const axiosInstance = useSecureAxios();
+  const { toggleLike, toggleDislike, getTimeAgo } = useContext(DetailContext);
   useEffect(() => {
     setLikes(blog?.likeCount);
     // console.log(likes);
   }, [toggleLike, toggleDislike]);
 
-  // comment section fetching
   useEffect(() => {
     async function fetchComments() {
       try {
-        const response = await axios.get(
+        const response = await axiosInstance.get(
           `http://localhost:5001/comments/${blog._id}`
         );
 
         if (response.data) {
-          // setBlogs(response.data);
-          // console.log(response.data);
           setCommentCount(response.data.length);
         } else {
           console.warn("No data found:", response.data);
-          // setError("No data found");
         }
       } catch (error) {
         console.error("Error fetching data:", error);
-        // setError("Error fetching data");
-      } finally {
-        // setLoading(false);
       }
     }
 
-    fetchComments();
-  }, []);
+    if (blog._id) {
+      fetchComments();
+    }
+  }, [axiosInstance, blog._id]);
 
   return (
-    <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="max-w-md w-full mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       {/* Image section */}
       <figure className="relative">
         <img
@@ -71,7 +68,7 @@ const BlogCards = ({ blog }) => {
             <span className="font-semibold">Author :</span> {blog?.authorName}
           </p>
           <p className="text-xs font-light bg-gray-200 px-2 py-1 rounded-3xl">
-            2 Min ago
+            {getTimeAgo(blog?.submissionTime)}
           </p>
         </div>
 

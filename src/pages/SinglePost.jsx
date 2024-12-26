@@ -27,7 +27,7 @@ const SinglePost = () => {
   const handleLikeButton = useLikeButton();
   const handleDislike = useDislikeButton();
 
-  const { likeCount, setLikeCount, dislikeCount, setDislikeCount } =
+  const { likeCount, setLikeCount, dislikeCount, setDislikeCount, getTimeAgo } =
     useContext(DetailContext);
 
   const { id } = useParams();
@@ -188,7 +188,7 @@ const SinglePost = () => {
         </div>
 
         <p className="text-sm text-gray-500 mt-2">
-          Posted {data?.postedTime || "a few"} min ago
+          Posted : {getTimeAgo(data?.submissionTime)}
         </p>
 
         <p className="text-gray-700 mt-6">
@@ -282,19 +282,6 @@ const SinglePost = () => {
               comments={comments}
             ></CommentModal>
           </div>
-
-          {/* 
-          
-          
-          
-          
-          */}
-          {/* 
-          
-          
-          
-          
-          */}
         </div>
       )}
     </div>
