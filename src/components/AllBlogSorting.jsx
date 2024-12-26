@@ -81,8 +81,11 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
           value={category}
         >
           <option value="">All</option>
-          <option value="Travel">Travel</option>
+          <option value="Travel">Technology</option>
+          <option value="Lifestyle">Lifestyle</option>
+          <option value="Business">Business</option>
           <option value="Health">Health</option>
+          {}
         </select>
       </div>
     </div>

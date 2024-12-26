@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useSecureAxios from "../hooks/useSecureAxios";
 import FeaturedTable from "../components/FeaturedTable";
+import Loading from "./Loading";
 
 const Featured = () => {
   const secureAxios = useSecureAxios();
@@ -26,10 +27,20 @@ const Featured = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-11/12 mx-auto mt-7 mb-12">
+        <div className="bg-gray-800 text-white py-5 px-6 rounded-t-md shadow-md">
+          <h2 className="text-2xl font-bold">Featured Blogs</h2>
+          <p className="text-sm text-gray-300 mt-2">
+            All the featured blogs are here, organized in one place.
+          </p>
+        </div>
+        <Loading />
+      </div>
+    );
   }
   return (
-    <div className="w-11/12 mx-auto mt-7">
+    <div className="w-11/12 mx-auto mt-7 mb-12">
       {/* <h1>Featured</h1> */}
 
       <div className="bg-gray-800 text-white py-5 px-6 rounded-t-md shadow-md">

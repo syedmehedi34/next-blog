@@ -12,6 +12,8 @@ import { DetailContext } from "../providers/BlogDetailsProvider";
 import useDislikeButton from "../hooks/useDislikeButton";
 import useLikeButton from "../hooks/useLikeButton";
 import UpdateBlog from "../private_pages/UpdateBlog";
+import { div } from "motion/react-client";
+import { CommentModal } from "../components/CommentModal";
 
 const SinglePost = () => {
   const [comments, setComments] = useState(0);
@@ -273,26 +275,47 @@ const SinglePost = () => {
 
       {/* Comments Modal */}
       {showCommentsModal && (
-        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg max-w-lg w-full">
-            <h2 className="text-2xl font-semibold mb-4">Comments</h2>
-            <ul className="space-y-3  overflow-scroll h-40">
-              {comments.map((comment, index) => (
-                <li
-                  key={index}
-                  className="text-gray-700 bg-gray-100 py-1 px-2 rounded-md"
-                >
-                  {comment.comment}
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={() => setShowCommentsModal(false)}
-              className="btn btn-secondary text-white py-2 px-4 rounded-md bg-red-600 hover:bg-red-700 mt-4 transition duration-200"
-            >
-              Close
-            </button>
+        <div>
+          <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+            {/* <div className="bg-white p-6 rounded-lg max-w-lg w-full">
+              <ul className="space-y-3  overflow-scroll h-40">
+                {comments.map((comment, index) => (
+                  <li
+                    key={index}
+                    className="text-gray-700 bg-gray-100 py-1 px-2 rounded-md"
+                  >
+                    {comment.comment}
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => setShowCommentsModal(false)}
+                className="btn btn-secondary text-white py-2 px-4 rounded-md bg-red-600 hover:bg-red-700 mt-4 transition duration-200"
+              >
+                Close
+              </button>
+            </div> */}
+
+            <div>
+              <CommentModal
+                setShowCommentsModal={setShowCommentsModal}
+                comments={comments}
+              ></CommentModal>
+            </div>
           </div>
+
+          {/* 
+          
+          
+          
+          
+          */}
+          {/* 
+          
+          
+          
+          
+          */}
         </div>
       )}
     </div>

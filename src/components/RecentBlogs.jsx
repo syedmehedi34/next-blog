@@ -120,38 +120,42 @@ const RecentBlogs = () => {
                   </svg>
                 </button>
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col h-[300px]">
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">
                   <p className="hover:text-blue-600">{blog.title}</p>
                 </h3>
                 <p className="text-gray-600 mb-4">{blog.short_description}</p>
-                <div className="flex items-center mb-4">
-                  <img
-                    src={
-                      blog?.authorImage ||
-                      "https://img.icons8.com/office/40/person-male-skin-type-4.png"
-                    }
-                    alt={blog.authorName}
-                    className="w-10 h-10 rounded-full mr-3 border border-gray-300"
-                  />
-                  <div>
-                    <p className="text-sm font-medium text-gray-900">
-                      {blog.authorName}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {getTimeAgo(blog.submissionTime)}
-                    </p>
+
+                <div className="flex-1 flex-grow">
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={
+                        blog?.authorImage ||
+                        "https://img.icons8.com/office/40/person-male-skin-type-4.png"
+                      }
+                      alt={blog.authorName}
+                      className="w-10 h-10 rounded-full mr-3 border border-gray-300"
+                    />
+                    <div>
+                      <p className="text-sm font-medium text-gray-900">
+                        {blog.authorName}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        {getTimeAgo(blog.submissionTime)}
+                      </p>
+                    </div>
                   </div>
                 </div>
+
                 <div className="flex space-x-3">
                   <Link className="flex-1" to={`/blogs/${blog._id}`}>
-                    <button className="btn btn-primary w-full text-center bg-blue-600 text-white py-2 px-4 rounded-lg ">
+                    <button className="btn btn-primary min-h-0 h-10 rounded-full w-full text-center bg-blue-600 text-white py-2 px-4 ">
                       Details
                     </button>
                   </Link>
                   <button
                     onClick={() => handleWishlist(blog)}
-                    className="flex-1 border-2 border-blue-600 text-blue-600 py-2 px-4 rounded-lg hover:bg-blue-50 transition-colors"
+                    className="flex-1 border-2 border-blue-600 text-blue-600 py-2 px-4 hover:bg-blue-50 transition-colors min-h-0 h-10 rounded-full"
                   >
                     Add to Wishlist
                   </button>
