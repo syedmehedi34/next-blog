@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5001",
+  baseURL: "https://nextblog-phi-ten.vercel.app",
+  // baseURL: "http://localhost:5001",
   withCredentials: true,
 });
 

@@ -7,12 +7,14 @@ import Loading from "../pages/Loading";
 const Wishlist = () => {
   const secureAxios = useSecureAxios();
   const { user } = useAuth();
-  const userEmail = user.email;
+  const userEmail = user?.email;
+  // console.log(userEmail);
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
 
   useEffect(() => {
     secureAxios
+      // .get(`/wishlist?userEmail=${userEmail}`)
       .get("/wishlist", { params: { userEmail } })
       .then((res) => {
         // console.log(res.data);

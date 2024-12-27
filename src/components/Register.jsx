@@ -89,7 +89,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center my-12">
         <div className="card border bg-base-100 w-full max-w-lg shrink-0 shadow-lg p-10">
           <h2 className="text-2xl font-semibold text-center">
             Register your account

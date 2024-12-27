@@ -18,6 +18,7 @@ const AllBlogs = () => {
         const response = await axiosInstance.get("/all_blogs");
 
         if (response.data) {
+          // console.log(response.data);
           setBlogs(response.data);
         } else {
           console.warn("No data found:", response.data);
@@ -69,7 +70,7 @@ const AllBlogs = () => {
       </div>
 
       <div className="my-8  grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
-        {blogs.map((blog, i) => (
+        {blogs?.map((blog, i) => (
           <BlogCards key={i} blog={blog} />
         ))}
       </div>

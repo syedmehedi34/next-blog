@@ -1,4 +1,3 @@
-import DonateNow from "../components/DonateNow";
 import FeaturedCategory from "../components/FeaturedCategory";
 import Hero from "../components/Hero";
 import NewsLetter from "../components/NewsLetter";

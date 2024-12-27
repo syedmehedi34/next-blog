@@ -79,9 +79,12 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5001/all_blogs`, {
-        params: { searchText },
-      });
+      const response = await axios.get(
+        `https://nextblog-phi-ten.vercel.app/all_blogs`,
+        {
+          params: { searchText },
+        }
+      );
       setBlogs(response.data);
       // console.log(response.data);
     } catch (error) {

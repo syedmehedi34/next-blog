@@ -91,7 +91,7 @@ const AuthProvider = ({ children }) => {
         const user = { email: currentUser.email };
 
         axios
-          .post("http://localhost:5001/jwt", user, {
+          .post("https://nextblog-phi-ten.vercel.app/jwt", user, {
             withCredentials: true,
           })
           .then((res) => {
@@ -100,7 +100,11 @@ const AuthProvider = ({ children }) => {
           });
       } else {
         axios
-          .post("http://localhost:5001/logout", {}, { withCredentials: true })
+          .post(
+            "https://nextblog-phi-ten.vercel.app/logout",
+            {},
+            { withCredentials: true }
+          )
           .then((res) => {
             console.log("logout data : ", res.data);
             setLoading(false);

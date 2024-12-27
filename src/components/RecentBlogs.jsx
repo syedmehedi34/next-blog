@@ -3,6 +3,7 @@ import useSecureAxios from "../hooks/useSecureAxios";
 import { Link } from "react-router-dom";
 import useWishlistHook from "../hooks/wishlistHook";
 import { DetailContext } from "../providers/BlogDetailsProvider";
+import Loading from "../pages/Loading";
 
 const RecentBlogs = () => {
   const [blogs, setBlogs] = useState(null);
@@ -28,7 +29,13 @@ const RecentBlogs = () => {
     fetchData();
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading)
+    return (
+      <div>
+        <Loading />;
+      </div>
+    );
+
   if (error) return <div>Error: {error.message}</div>;
 
   return (
