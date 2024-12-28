@@ -40,7 +40,7 @@ const AddBlog = () => {
         // console.log(data);
         Swal.fire({
           title: "Success!",
-          text: "Coffee added successfully",
+          text: "Post added successfully",
           icon: "success",
           confirmButtonText: "Ok",
         });

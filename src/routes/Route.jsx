@@ -38,11 +38,19 @@ const routes = [
       },
       {
         path: "/blogs/:id",
-        element: <SinglePost />,
+        element: (
+          <PrivateRoute>
+            <SinglePost />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/blogs/update/:id",
-        element: <UpdateBlog />,
+        element: (
+          <PrivateRoute>
+            <UpdateBlog />
+          </PrivateRoute>
+        ),
       },
 
       {
