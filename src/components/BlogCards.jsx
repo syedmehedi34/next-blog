@@ -15,6 +15,7 @@ const BlogCards = ({ blog }) => {
   const [likes, setLikes] = useState(0);
   const [commentCount, setCommentCount] = useState(0);
   // console.log(blog);
+
   const { handleWishlist } = useWishlistHook();
   const handleLikeButton = useLikeButton();
   const handleDislike = useDislikeButton();

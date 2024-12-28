@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useState } from "react";
 import useSecureAxios from "../hooks/useSecureAxios";
 
-const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
+const AllBlogSorting = ({ setBlogs, setLoading, setError, setIsNoData }) => {
   const [category, setCategory] = useState("");
   const axiosInstance = useSecureAxios();
 
-  // category search
+  // * search by category
   const handleCategoryChange = async (e) => {
     const selectedCategory = e.target.value;
     setCategory(selectedCategory);
@@ -49,8 +49,10 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
       setLoading(false);
     }
   };
+
   // category search end
 
+  // * search by text on title
   const handleTextSearch = async (e) => {
     const searchText = e.target.value;
     // console.log(searchText);
@@ -126,7 +128,7 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError }) => {
           value={category}
         >
           <option value="">All</option>
-          <option value="Travel">Technology</option>
+          <option value="Technology">Technology</option>
           <option value="Lifestyle">Lifestyle</option>
           <option value="Business">Business</option>
           <option value="Health">Health</option>
