@@ -4,15 +4,13 @@ import {
   getCoreRowModel,
   flexRender,
 } from "@tanstack/react-table";
-import Swal from "sweetalert2";
-import axios from "axios";
 import useSecureAxios from "../hooks/useSecureAxios";
 import { Link } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa6";
 
 const FeaturedTable = ({ featured }) => {
   const [data, setData] = useState(featured);
-
+  console.log(featured);
   const axiosSecure = useSecureAxios();
 
   const columns = [
@@ -22,7 +20,7 @@ const FeaturedTable = ({ featured }) => {
       cell: ({ row }) => (
         <div className="flex items-center space-x-2">
           <img
-            src={row.original.image}
+            src={row.original.authorImage}
             alt="author"
             className="w-12 h-12 object-cover rounded"
           />

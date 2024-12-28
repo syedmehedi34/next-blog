@@ -20,7 +20,7 @@ const FeaturedTable = ({ wishlist }) => {
       cell: ({ row }) => (
         <div className="flex items-center space-x-2">
           <img
-            src={row.original.image}
+            src={row.original.authorImage}
             alt="author"
             className="w-12 h-12 object-cover rounded"
           />
