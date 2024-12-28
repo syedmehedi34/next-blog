@@ -50,7 +50,7 @@ const BlogCards = ({ blog }) => {
       {/* Image section */}
       <figure className="relative">
         <img
-          src="https://www.elegantthemes.com/blog/wp-content/uploads/2018/11/shutterstock_1049564585-960.jpg"
+          src={blog?.image}
           alt="The Future of Web Development"
           className="w-full h-56 object-cover"
         />

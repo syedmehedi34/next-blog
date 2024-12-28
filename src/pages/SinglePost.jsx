@@ -132,7 +132,7 @@ const SinglePost = () => {
       <div className="relative">
         <img
           src={
-            post?.image_url ||
+            post?.image ||
             "https://www.elegantthemes.com/blog/wp-content/uploads/2018/11/shutterstock_1049564585-960.jpg"
           }
           alt={post?.title}
