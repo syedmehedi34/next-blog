@@ -7,8 +7,8 @@ import AddBlog from "../pages/AddBlog";
 import Login from "../components/Login";
 import Register from "../components/Register";
 import PrivateRoute from "./PrivateRoute";
-import UpdateProfile from "../private_pages/UpdateProfile";
-import ResetPass from "../private_pages/ResetPass";
+// import UpdateProfile from "../private_pages/UpdateProfile";
+// import ResetPass from "../private_pages/ResetPass";
 import SinglePost from "../pages/SinglePost";
 import Wishlist from "../private_pages/Wishlist";
 import Featured from "../pages/Featured";
@@ -45,7 +45,6 @@ const routes = [
         element: <UpdateBlog />,
       },
 
-      //! ---------------------------
       {
         path: "/featured",
         element: <Featured />,
@@ -59,18 +58,20 @@ const routes = [
           </PrivateRoute>
         ),
       },
-      {
-        path: "/update-profile",
-        element: (
-          <PrivateRoute>
-            <UpdateProfile />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/reset-password",
-        element: <ResetPass />,
-      },
+      //! ---------------------------
+
+      // {
+      //   path: "/update-profile",
+      //   element: (
+      //     <PrivateRoute>
+      //       <UpdateProfile />
+      //     </PrivateRoute>
+      //   ),
+      // },
+      // {
+      //   path: "/reset-password",
+      //   element: <ResetPass />,
+      // },
       {
         path: "/auth/login",
         element: <Login />,
