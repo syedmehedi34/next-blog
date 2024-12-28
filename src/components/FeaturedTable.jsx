@@ -10,7 +10,7 @@ import { FaArrowRight } from "react-icons/fa6";
 
 const FeaturedTable = ({ featured }) => {
   const [data, setData] = useState(featured);
-  console.log(featured);
+  // console.log(featured);
   const axiosSecure = useSecureAxios();
 
   const columns = [
