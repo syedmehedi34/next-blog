@@ -111,7 +111,6 @@ const SinglePost = () => {
 
   // const { handleButtonClick1 } = useButtonHandlers();
   const { handleWishlist } = useWishlistHook();
-
   //
 
   // - handle loading and error states in your component:
@@ -151,7 +150,7 @@ const SinglePost = () => {
           <div className="flex items-center mt-4 space-x-4">
             <img
               src={
-                post?.authorPhoto ||
+                post?.authorImage ||
                 "https://img.icons8.com/stickers/50/administrator-male.png"
               }
               alt={post?.authorName}
