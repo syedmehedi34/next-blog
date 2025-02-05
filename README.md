@@ -1,3 +1,6 @@
+<img src="https://i.ibb.co.com/bRMvTmkP/Screenshot-2025-02-05-at-10-22-42.png" alt="Screenshot" width="100%">
+
+
 # Project Name : _Next Blog - A Blogging website_
 
 ## Project Requirements : https://docs.google.com/document/d/1BmkQilfhFTLDeF_KOWKThBV8iATvSHfon93pMuk8hd4/edit?tab=t.0
