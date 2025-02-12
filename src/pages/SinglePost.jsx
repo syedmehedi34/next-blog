@@ -11,8 +11,6 @@ import useWishlistHook from "../hooks/wishlistHook";
 import { DetailContext } from "../providers/BlogDetailsProvider";
 import useDislikeButton from "../hooks/useDislikeButton";
 import useLikeButton from "../hooks/useLikeButton";
-import UpdateBlog from "../private_pages/UpdateBlog";
-import { div } from "motion/react-client";
 import { CommentModal } from "../components/CommentModal";
 import { TiArrowBack } from "react-icons/ti";
 
@@ -127,7 +125,7 @@ const SinglePost = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto relative p-6 bg-white shadow-md rounded-lg mb-5 mt-16">
+    <div className="max-w-4xl mx-auto relative p-6 bg-white dark:bg-gray-800 shadow-md rounded-lg mb-5 mt-16">
       {/* Blog Image */}
       <div className="relative">
         <img
@@ -145,7 +143,9 @@ const SinglePost = () => {
 
       {/* Blog Content */}
       <div className="mt-6">
-        <h1 className="text-4xl font-bold text-gray-700">{post?.title}</h1>
+        <h1 className="text-4xl font-bold text-gray-700 dark:text-gray-50">
+          {post?.title}
+        </h1>
         <div className="flex items-center justify-between">
           <div className="flex items-center mt-4 space-x-4">
             <img
@@ -157,10 +157,10 @@ const SinglePost = () => {
               className="w-12 h-12 rounded-full border-gray-300 border object-cover"
             />
             <div>
-              <p className="text-sm text-gray-700 font-semibold">
+              <p className="text-sm text-gray-700 dark:text-gray-300 font-semibold">
                 {post?.authorName || "Unknown Author"}
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-300">
                 {post?.authorEmail || "author@domain.com"}
               </p>
             </div>
@@ -182,14 +182,14 @@ const SinglePost = () => {
           )}
         </div>
 
-        <p className="text-sm text-gray-500 mt-2">
+        <p className="text-sm text-gray-500 dark:text-gray-300 mt-2">
           Posted : {getTimeAgo(post?.submissionTime)}
         </p>
 
-        <p className="text-gray-700 mt-6">
+        <p className="text-gray-700 dark:text-gray-50 mt-6">
           <span className="font-bold">About :</span> {post?.short_description}
         </p>
-        <p className="text-gray-700 mt-6">
+        <p className="text-gray-700 dark:text-gray-300 mt-6">
           <span className="font-bold">Description :</span>
           {post?.long_description}
         </p>
@@ -244,7 +244,7 @@ const SinglePost = () => {
           <div>
             <button
               onClick={() => handleLikeButton(post)}
-              className="flex items-center text-gray-600 hover:text-blue-600"
+              className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600"
             >
               <FaThumbsUp className="mr-1" />
               <span>{likeCount || 0}</span>
@@ -254,7 +254,7 @@ const SinglePost = () => {
           <div>
             <button
               onClick={() => handleDislike(post)}
-              className="flex items-center text-gray-600 hover:text-red-600"
+              className="flex items-center text-gray-600 dark:text-gray-300 hover:text-red-600"
             >
               <FaThumbsDown className="mr-1" />
               <span>{dislikeCount}</span>{" "}
@@ -262,7 +262,7 @@ const SinglePost = () => {
             </button>
           </div>
         </div>
-        <div className="flex items-center space-x-2 text-gray-600">
+        <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
           <FaComment />
           <span>{comments?.length || 0}</span>
         </div>
@@ -282,7 +282,7 @@ const SinglePost = () => {
 
       <div className="absolute -top-12 left-0">
         <Link to={-1}>
-          <button className="flex items-center  gap-2 text-gray-600 btn bg-white hover:bg-white shadow-none border-none text-lg">
+          <button className="flex items-center  gap-2 text-gray-600 dark:text-gray-50 btn min-h-0 h-10 bg-white dark:bg-gray-800 hover:bg-white shadow-none border-none text-lg">
             <span>
               <TiArrowBack />
             </span>{" "}

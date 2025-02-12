@@ -58,7 +58,7 @@ const Wishlist = () => {
             <h3 className="text-2xl mt-10 text-center">
               No items in your wishlist
             </h3>
-            <p className="text-gray-500 mt-2 text-center">
+            <p className="text-gray-500 dark:text-gray-50 mt-2 text-center">
               Add items to your wishlist by clicking the heart icon on the blog
               page.
             </p>

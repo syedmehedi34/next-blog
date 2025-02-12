@@ -50,8 +50,8 @@ const AddBlog = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-10 px-4">
-      <div className="max-w-2xl w-full bg-white shadow-xl rounded-lg p-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 py-10 px-4">
+      <div className="max-w-2xl w-full bg-white dark:bg-gray-800 shadow-xl rounded-lg p-8">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
           AddBlogs
         </h2>
@@ -59,7 +59,10 @@ const AddBlog = () => {
           <div className="space-y-4">
             {/* Title Input */}
             <div>
-              <label htmlFor="title" className="block text-gray-600">
+              <label
+                htmlFor="title"
+                className="block text-gray-600 dark:text-gray-300"
+              >
                 Title
               </label>
               <input
@@ -74,7 +77,10 @@ const AddBlog = () => {
 
             {/* Image URL Input */}
             <div>
-              <label htmlFor="imageUrl" className="block text-gray-600">
+              <label
+                htmlFor="imageUrl"
+                className="block text-gray-600 dark:text-gray-300"
+              >
                 Image URL
               </label>
               <input
@@ -89,7 +95,10 @@ const AddBlog = () => {
 
             {/* Category Dropdown */}
             <div>
-              <label htmlFor="category" className="block text-gray-600">
+              <label
+                htmlFor="category"
+                className="block text-gray-600 dark:text-gray-300"
+              >
                 Category
               </label>
               <select
@@ -108,7 +117,10 @@ const AddBlog = () => {
 
             {/* Short Description */}
             <div>
-              <label htmlFor="shortDesc" className="block text-gray-600">
+              <label
+                htmlFor="shortDesc"
+                className="block text-gray-600 dark:text-gray-300"
+              >
                 Short Description
               </label>
               <textarea
@@ -123,7 +135,10 @@ const AddBlog = () => {
 
             {/* Long Description */}
             <div>
-              <label htmlFor="longDesc" className="block text-gray-600">
+              <label
+                htmlFor="longDesc"
+                className="block text-gray-600 dark:text-gray-300"
+              >
                 Long Description
               </label>
               <textarea

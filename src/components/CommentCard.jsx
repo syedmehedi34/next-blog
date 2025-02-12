@@ -23,15 +23,17 @@ const CommentCard = ({ comment }) => {
         </div>
         <div className="flex-grow">
           <div className="flex items-center space-x-2">
-            <h4 className="font-medium text-gray-900">
+            <h4 className="font-medium text-gray-900 dark:text-gray-50">
               {comment?.commenterName}
             </h4>
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-500 dark:text-gray-50">
               {/* {comment?.commentingTime} */}
               {getTimeAgo(comment?.commentingTime)}
             </span>
           </div>
-          <p className="mt-1 text-gray-700">{comment?.comment}</p>
+          <p className="mt-1 text-gray-700 dark:text-gray-50">
+            {comment?.comment}
+          </p>
           <div className="mt-2 flex items-center space-x-4">
             <button className="flex items-center space-x-1 text-gray-500">
               <ThumbsUp className="w-4 h-4" />

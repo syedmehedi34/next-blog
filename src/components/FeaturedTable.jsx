@@ -24,7 +24,9 @@ const FeaturedTable = ({ featured }) => {
             alt="author"
             className="w-12 h-12 object-cover rounded"
           />
-          <span className="text-gray-700">{row.original.authorName}</span>
+          <span className="text-gray-700 dark:text-gray-50">
+            {row.original.authorName}
+          </span>
         </div>
       ),
     },
@@ -70,7 +72,7 @@ const FeaturedTable = ({ featured }) => {
                 {headerGroup.headers.map((header, index) => (
                   <th
                     key={header.id}
-                    className="px-4 py-2 text-left text-gray-700 font-medium"
+                    className="px-4 py-2 text-left text-gray-700 dark:text-gray-50 dark:bg-gray-800 font-medium"
                     style={
                       index === 0
                         ? { width: "150px" } //  width for the "Image & Author" column
@@ -92,9 +94,12 @@ const FeaturedTable = ({ featured }) => {
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="hover:bg-gray-50 even:bg-gray-100">
+              <tr key={row.id} className="hover:bg-gray-900 even:bg-gray-800 ">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-4 py-2 text-gray-700">
+                  <td
+                    key={cell.id}
+                    className="px-4 py-2 text-gray-700 dark:text-gray-50"
+                  >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
