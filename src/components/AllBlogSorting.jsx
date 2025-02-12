@@ -97,7 +97,7 @@ const AllBlogSorting = ({ setBlogs, setLoading, setError, setIsNoData }) => {
   };
 
   return (
-    <div className="py-5 px-5 bg-gray-300 rounded-xl flex items-center justify-between">
+    <div className="py-5 px-5 bg-gray-300 dark:bg-gray-800 rounded-xl flex items-center justify-between">
       <div className="w-1/3">
         <label className="input input-bordered flex items-center gap-2">
           <input

@@ -46,7 +46,7 @@ const BlogCards = ({ blog }) => {
     }
   }, [axiosInstance, blog._id]);
   return (
-    <div className="max-w-md w-full mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="max-w-md w-full mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
       {/* Image section */}
       <figure className="relative">
         <img
@@ -65,17 +65,17 @@ const BlogCards = ({ blog }) => {
           <p className="text-xs font-light ">
             <span className="font-semibold">Author :</span> {blog?.authorName}
           </p>
-          <p className="text-xs font-light bg-gray-200 px-2 py-1 rounded-3xl">
+          <p className="text-xs font-light bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded-3xl">
             {getTimeAgo(blog?.submissionTime)}
           </p>
         </div>
 
-        <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+        <h3 className="text-2xl font-semibold text-gray-900 dark:text-gray-50 mb-2">
           {blog?.title}
         </h3>
 
         {/* Ensuring this <p> takes maximum space */}
-        <p className="text-gray-600 mb-4 flex-grow">
+        <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
           <strong>Short Description:</strong> {blog?.short_description}
         </p>
 
@@ -107,7 +107,7 @@ const BlogCards = ({ blog }) => {
               onClick={() => {
                 handleLikeButton(blog);
               }}
-              className="flex items-center text-gray-600 hover:text-blue-600"
+              className="flex items-center text-gray-600 dark:text-gray-300 hover:text-blue-600"
             >
               <FaThumbsUp className="mr-1" />
               <span>{likes || 0}</span>
@@ -116,14 +116,14 @@ const BlogCards = ({ blog }) => {
               onClick={() => {
                 handleDislike(blog);
               }}
-              className="flex items-center text-gray-600 hover:text-red-600"
+              className="flex items-center text-gray-600 dark:text-gray-300 hover:text-red-600"
             >
               <FaThumbsDown className="mr-1" />
               <span>{blog?.dislikeCount || 0}</span>
             </button>
           </div>
 
-          <div className="flex items-center space-x-2 text-gray-600">
+          <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-300">
             <FaComment />
             <span>{commentCount || 0}</span> {/* Display comment count */}
           </div>

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import BlogCards from "../components/BlogCards";
 import AllBlogSorting from "../components/AllBlogSorting";
 import Loading from "./Loading";
-import { use } from "react";
 import useSecureAxios from "../hooks/useSecureAxios";
 
 const AllBlogs = () => {
