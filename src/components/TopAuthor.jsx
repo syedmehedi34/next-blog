@@ -82,10 +82,10 @@ export default function ContentSections() {
   return (
     <div>
       {/* Popular Authors Section */}
-      <section className="py-16 bg-gray-50" ref={authorsRef}>
+      <section className="py-16 bg-gray-50 dark:bg-gray-900" ref={authorsRef}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.h2
-            className="text-3xl text-center font-bold text-gray-900 mb-4"
+            className="text-3xl text-center font-bold text-gray-900 dark:text-gray-50 mb-4"
             initial="hidden"
             animate={authorsControls}
             variants={containerVariants}
@@ -94,7 +94,7 @@ export default function ContentSections() {
           </motion.h2>
 
           <motion.p
-            className="text-xl text-center font-[500] text-gray-900 mb-12"
+            className="text-xl text-center font-[500] text-gray-900 dark:text-gray-50 mb-12"
             initial="hidden"
             animate={authorsControls}
             variants={containerVariants}
@@ -107,7 +107,7 @@ export default function ContentSections() {
             {authors.map((author, index) => (
               <motion.div
                 key={author.name}
-                className="bg-white rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-shadow"
+                className="bg-white dark:bg-gray-800 rounded-lg p-6 text-center shadow-md hover:shadow-lg transition-shadow"
                 custom={index}
                 initial="hidden"
                 animate={authorsControls}
@@ -121,11 +121,11 @@ export default function ContentSections() {
                   whileHover={{ scale: 1.1 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 />
-                <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-1">
                   {author.name}
                 </h3>
                 <p className="text-blue-600 mb-4">{author.role}</p>
-                <div className="flex justify-center space-x-6 text-gray-600">
+                <div className="flex justify-center space-x-6 text-gray-600 dark:text-gray-400">
                   <span>{author.posts} posts</span>
                   <span>{author.followers} followers</span>
                 </div>
