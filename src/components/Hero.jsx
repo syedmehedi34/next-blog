@@ -3,17 +3,17 @@ import { FaArrowRight } from "react-icons/fa";
 
 const Hero = () => {
   return (
-    <div className="carousel w-full h-[600px] md:h-[550px]">
+    <div className="carousel w-full h-[600px] md:h-[550px] dark:bg-gray-800 dark:rounded-3xl">
       {/* slide 1 starts  */}
       <div
         id="slide1"
-        className="carousel-item relative w-full flex-col-reverse md:flex-row"
+        className="carousel-item relative w-full flex-col-reverse md:flex-row "
       >
-        <div className="px-5 w-full md:w-1/2 h-full flex flex-col justify-center text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-black">
+        <div className="px-5 w-full md:w-1/2 h-full flex flex-col justify-center text-center  ">
+          <h1 className="text-3xl md:text-4xl font-bold text-black  dark:text-gray-50 ">
             Innovate the future, elevate your experience{" "}
           </h1>
-          <p className="text-lg md:text-xl text-black mt-6 mb-2">
+          <p className="text-lg md:text-xl text-black mt-6 mb-2  dark:text-gray-50 ">
             Simplify life and transform the way you connect with the world.{" "}
           </p>
           <div>
@@ -26,7 +26,7 @@ const Hero = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-1/2 rounded-3xl">
+        <div className="w-full md:w-1/2 rounded-3xl dark:bg-gray-800">
           <img
             src="https://i.ibb.co.com/JsyVLrS/2.jpg"
             className="w-full h-[300px] md:h-full object-cover max-[768px]:rounded-t-3xl md:rounded-r-3xl"
@@ -50,10 +50,10 @@ const Hero = () => {
         className="carousel-item relative w-full flex-col-reverse md:flex-row"
       >
         <div className="px-5 w-full md:w-1/2 h-full flex flex-col justify-center text-center">
-          <h1 className=" text-3xl md:text-4xl font-bold text-black">
+          <h1 className=" text-3xl md:text-4xl font-bold text-black  dark:text-gray-50 ">
             Wander far and wide, discover the unseen
           </h1>
-          <p className="text-lg md:text-xl text-black mt-6 mb-2">
+          <p className="text-lg md:text-xl text-black mt-6 mb-2  dark:text-gray-50 ">
             Embark on unforgettable journeys to hidden gems.
           </p>
           <div>
@@ -89,10 +89,10 @@ const Hero = () => {
         className="carousel-item relative w-full flex-col-reverse md:flex-row"
       >
         <div className="px-5 w-full md:w-1/2 h-full flex flex-col justify-center text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-black">
+          <h1 className="text-3xl md:text-4xl font-bold text-black  dark:text-gray-50 ">
             Capture every moment, inspire the world around
           </h1>
-          <p className="text-lg md:text-xl text-black mt-6 mb-2">
+          <p className="text-lg md:text-xl text-black mt-6 mb-2  dark:text-gray-50 ">
             Turn everyday moments into captivating stories.
           </p>
           <div>

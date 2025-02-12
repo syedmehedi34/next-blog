@@ -10,7 +10,7 @@ const Wishlist = () => {
   const userEmail = user?.email;
   // console.log(userEmail);
   const [wishlist, setWishlist] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     secureAxios
