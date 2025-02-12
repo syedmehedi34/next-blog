@@ -63,7 +63,10 @@ export default function FeaturedCategories() {
   const allCategories = [...categories, ...categories];
 
   return (
-    <section className="py-16 bg-white overflow-hidden" ref={ref}>
+    <section
+      className="py-16 bg-white dark:bg-gray-900 overflow-hidden"
+      ref={ref}
+    >
       <style>{`
         .marquee-container {
           width: 100%;
@@ -100,7 +103,7 @@ export default function FeaturedCategories() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.h2
-          className="text-3xl font-bold text-gray-900 mb-4 text-center"
+          className="text-3xl font-bold text-gray-900 dark:text-gray-50 mb-4 text-center"
           initial="hidden"
           animate={controls}
           variants={containerVariants}
@@ -108,7 +111,7 @@ export default function FeaturedCategories() {
           Featured Categories
         </motion.h2>
         <motion.p
-          className="text-xl font-[500] text-gray-900 mb-12 text-center"
+          className="text-xl font-[500] text-gray-900 dark:text-gray-50 mb-12 text-center"
           initial="hidden"
           animate={controls}
           variants={containerVariants}
